@@ -29,14 +29,14 @@ class NewDataEntryTableViewController: UITableViewController {
     override func viewDidLoad() {
         //print(objectNum)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "gotoVehiculo"
-        {
-            if let detailsVC = segue.destinationViewController as? NewVehicleController{
-            detailsVC.objectNum = self.objectNum
-            }
-        }
-    }
+//    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "gotoVehiculo"
+//        {
+//            if let detailsVC = segue.destinationViewController as? NewVehicleController{
+//            detailsVC.objectNum = self.objectNum
+//            }
+ //       }
+ //   }
 
 }
