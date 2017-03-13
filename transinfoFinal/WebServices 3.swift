@@ -26,7 +26,9 @@ class WebService : NSObject{
     }
     
     
-    
+    func printQuery(numDeTablilla: String ) -> Dictionary<String,AnyObject>{
+        return WebService.get(url + Methods.ListVehicleByPlateNumber + "/" + numDeTablilla)
+    }
     
     
     //******************************************* GETS Dictionary Functions **************************************************
@@ -51,6 +53,7 @@ class WebService : NSObject{
                 self.addDatatoGetsData("locations", item: WebService.getsArrayOfDictionaries(WebService.get(url + Methods.locations)))
                 self.addDatatoGetsData("reportTypes", item: WebService.getsArrayOfDictionaries(WebService.get(url + Methods.reportTypes)))
                 self.addDatatoGetsData("nearTo", item: WebService.getsArrayOfDictionaries(WebService.get(url + Methods.nearTo)))
+                //self.addDatatoGetsData("ListVehicleByPlateNumber", item: WebService.getsArrayOfDictionaries(WebService.get(url + Methods.ListVehicleByPlateNumber + "/7")))
                 dataDownloaded[calls-1]=true
             }else{
                 print("Recalling same methods attempted")

@@ -471,6 +471,14 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     
 
     @IBAction func searchTablilla(sender: AnyObject) {
+        let webServicesQuery = WebService.init()
+        webServicesQuery.initiate(1)
+        
+        // arrayList = webServicesObject.arrayOfDictionaries("ListVehicleByPlateNumber")
+        print(webServicesQuery.printQuery(search.text!))
+        
+        
+
     }
     
     

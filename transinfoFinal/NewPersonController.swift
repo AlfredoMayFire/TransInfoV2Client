@@ -101,6 +101,8 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         scrollView.contentSize.height = 1000
         
         //ws
+        
+        
         let webServicesObject = WebService.init()
         webServicesObject.initiate(3)
         

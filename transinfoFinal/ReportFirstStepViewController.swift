@@ -47,6 +47,7 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
  
     @IBOutlet weak var citiesTable: UITableView!
     
+    var arrayList: NSArray = NSArray()
     
     var objectNum = Int()
     
@@ -155,18 +156,20 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         let webServicesObject = WebService.init()
         webServicesObject.initiate(1)
         
+       // arrayList = webServicesObject.arrayOfDictionaries("ListVehicleByPlateNumber")
+        //print(webServicesObject.printQuery())
+        
         typeAccident.isKeyboardHidden = true
         typeAccident.isDismissWhenSelected = true
         typeAccident.isArrayWithObject = true
         typeAccident.keyPath = "DescriptionES"
         typeAccident.arrayList = webServicesObject.arrayOfDictionaries("reportTypes")
         
-        
         stateField.isKeyboardHidden = true
         stateField.isDismissWhenSelected = true
         stateField.isArrayWithObject = true
-        stateField.keyPath = "DescriptionES"
-        stateField.arrayList = webServicesObject.arrayOfDictionaries("cities")
+        stateField.keyPath = "DescriptionES"//
+        stateField.arrayList = webServicesObject.arrayOfDictionaries("cities")//cities
         
         municipioField.isKeyboardHidden = true
         municipioField.isDismissWhenSelected = true

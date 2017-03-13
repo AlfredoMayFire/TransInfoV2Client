@@ -38,6 +38,7 @@
 		EB17581D1E6C5EAB003BFC0F /* ReportsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB17581C1E6C5EAB003BFC0F /* ReportsListController.swift */; };
 		EB17581F1E6C6BEB003BFC0F /* objectNum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB17581E1E6C6BEB003BFC0F /* objectNum.swift */; };
 		EB1758211E6C6E25003BFC0F /* objectNumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1758201E6C6E25003BFC0F /* objectNumManager.swift */; };
+		EB581E551E76CCE100BCD7C4 /* magnifying-glass-icon-26777.png in Resources */ = {isa = PBXBuildFile; fileRef = EB581E541E76CCE100BCD7C4 /* magnifying-glass-icon-26777.png */; };
 		EB72BB201E66F67400AB42BA /* InfraccionesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72BB1F1E66F67400AB42BA /* InfraccionesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		EB17581C1E6C5EAB003BFC0F /* ReportsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReportsListController.swift; path = ../ReportsListController.swift; sourceTree = "<group>"; };
 		EB17581E1E6C6BEB003BFC0F /* objectNum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = objectNum.swift; sourceTree = "<group>"; };
 		EB1758201E6C6E25003BFC0F /* objectNumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = objectNumManager.swift; sourceTree = "<group>"; };
+		EB581E541E76CCE100BCD7C4 /* magnifying-glass-icon-26777.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "magnifying-glass-icon-26777.png"; path = "../../../Downloads/magnifying-glass-icon-26777.png"; sourceTree = "<group>"; };
 		EB72BB1F1E66F67400AB42BA /* InfraccionesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfraccionesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 				A078DCE71D49A9CE00D40E51 /* PersonsTableViewController.swift */,
 				A0AD03681D590BA500E424DA /* PersonExtendedViewController.swift */,
 				A078DCF81D4ED18400D40E51 /* NewVehicleController.swift */,
+				EB581E541E76CCE100BCD7C4 /* magnifying-glass-icon-26777.png */,
 				A078DCFC1D4EDC9400D40E51 /* NewVehicleDriverController.swift */,
 				A078DCE51D49A8A700D40E51 /* VehiclesTableViewController.swift */,
 				A078DCF21D4E908F00D40E51 /* VehicleExtendedViewController.swift */,
@@ -327,6 +330,7 @@
 			files = (
 				A078DCBC1D48090500D40E51 /* LaunchScreen.storyboard in Resources */,
 				A078DCB91D48090500D40E51 /* Assets.xcassets in Resources */,
+				EB581E551E76CCE100BCD7C4 /* magnifying-glass-icon-26777.png in Resources */,
 				A078DCB41D48090500D40E51 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

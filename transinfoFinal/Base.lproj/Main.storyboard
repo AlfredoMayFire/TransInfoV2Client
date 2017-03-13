@@ -1376,7 +1376,6 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="searchLicence:" destination="4Dh-2u-Ip0" eventType="editingDidEnd" id="GDb-ZU-sZn"/>
-                                            <action selector="searchTablilla:" destination="y6B-ak-hjx" eventType="editingDidEnd" id="AT6-Ys-8LB"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VEHÍCULO DE LA PERSONA:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uu-uU-NmJ">
@@ -1399,6 +1398,13 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-vn-pVy">
+                                        <rect key="frame" x="209" y="132" width="32" height="27"/>
+                                        <state key="normal" title="Button" image="Question Mark"/>
+                                        <connections>
+                                            <action selector="searchTablilla:" destination="y6B-ak-hjx" eventType="touchUpInside" id="UFK-pI-Wa8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -3594,6 +3600,7 @@
         <image name="ID Entry Tab" width="25" height="25"/>
         <image name="Narrative Tab" width="25" height="25"/>
         <image name="Person Tab 1" width="25" height="25"/>
+        <image name="Question Mark" width="50" height="50"/>
         <image name="Sidebar 2" width="22" height="17"/>
         <image name="UPRM Seal" width="1024" height="1024"/>
         <image name="Vehicle Tab 5" width="25" height="25"/>
