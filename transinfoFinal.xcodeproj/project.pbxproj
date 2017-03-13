@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		897A57FF5FB1D47BB4D5FFBF /* Pods_transinfoFinal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65016598DDA895C3D319D3C3 /* Pods_transinfoFinal.framework */; };
 		A03F59061DDEBDAB0021A5B5 /* SwiftDropDownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F59051DDEBDAB0021A5B5 /* SwiftDropDownList.swift */; };
 		A078DCAF1D48090500D40E51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A078DCAE1D48090500D40E51 /* AppDelegate.swift */; };
 		A078DCB11D48090500D40E51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A078DCB01D48090500D40E51 /* ViewController.swift */; };
@@ -60,9 +59,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1625856159775053059EBB78 /* Pods-transinfoFinal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transinfoFinal.release.xcconfig"; path = "Pods/Target Support Files/Pods-transinfoFinal/Pods-transinfoFinal.release.xcconfig"; sourceTree = "<group>"; };
-		1DE1D1FB54B6CED9CE04DFEC /* Pods-transinfoFinal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transinfoFinal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-transinfoFinal/Pods-transinfoFinal.debug.xcconfig"; sourceTree = "<group>"; };
-		65016598DDA895C3D319D3C3 /* Pods_transinfoFinal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transinfoFinal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03F59051DDEBDAB0021A5B5 /* SwiftDropDownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftDropDownList.swift; sourceTree = "<group>"; };
 		A078DCAB1D48090500D40E51 /* transinfoFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transinfoFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A078DCAE1D48090500D40E51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				897A57FF5FB1D47BB4D5FFBF /* Pods_transinfoFinal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,23 +126,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		15CFE3F8465EB6513B8F528D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				65016598DDA895C3D319D3C3 /* Pods_transinfoFinal.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9B04039B4FBACE2BCD91BFA9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1DE1D1FB54B6CED9CE04DFEC /* Pods-transinfoFinal.debug.xcconfig */,
-				1625856159775053059EBB78 /* Pods-transinfoFinal.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A078DCA21D48090500D40E51 = {
 			isa = PBXGroup;
 			children = (
@@ -157,8 +135,6 @@
 				A078DCC51D48090500D40E51 /* transinfoFinalTests */,
 				A078DCD01D48090500D40E51 /* transinfoFinalUITests */,
 				A078DCAC1D48090500D40E51 /* Products */,
-				9B04039B4FBACE2BCD91BFA9 /* Pods */,
-				15CFE3F8465EB6513B8F528D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,12 +227,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A078DCD61D48090500D40E51 /* Build configuration list for PBXNativeTarget "transinfoFinal" */;
 			buildPhases = (
-				22B453E87D4418AB9E172DA6 /* [CP] Check Pods Manifest.lock */,
 				A078DCA71D48090500D40E51 /* Sources */,
 				A078DCA81D48090500D40E51 /* Frameworks */,
 				A078DCA91D48090500D40E51 /* Resources */,
-				0173876BB228E45DCFDC7355 /* [CP] Embed Pods Frameworks */,
-				7481B2240A5D62A9CECC760A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -373,54 +346,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0173876BB228E45DCFDC7355 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-transinfoFinal/Pods-transinfoFinal-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		22B453E87D4418AB9E172DA6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		7481B2240A5D62A9CECC760A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-transinfoFinal/Pods-transinfoFinal-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A078DCA71D48090500D40E51 /* Sources */ = {
@@ -595,7 +520,6 @@
 		};
 		A078DCD71D48090500D40E51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1DE1D1FB54B6CED9CE04DFEC /* Pods-transinfoFinal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -614,7 +538,6 @@
 		};
 		A078DCD81D48090500D40E51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1625856159775053059EBB78 /* Pods-transinfoFinal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

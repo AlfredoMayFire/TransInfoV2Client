@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import MicroBlink
 import CoreData
 
 class NewPersonController: UIViewController/*, PPScanningDelegate*/{
@@ -247,7 +246,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    
 //    func coordinatorWithError(error: NSErrorPointer) -> PPCameraCoordinator? {
 //        
 //        /** 0. Check if scanning is supported */
