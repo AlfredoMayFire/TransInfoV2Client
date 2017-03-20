@@ -55,7 +55,13 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     var object = [NSManagedObject]()
     var modifier = 0
 
-    
+    //For Search
+    var dictionaryQuery = [String:AnyObject] ()
+    var content = String()
+    var finalContent = [String:String] ()
+    var vehicle: AnyObject?
+    var dictionaries: Dictionary<String,AnyObject> = ["vacio":"empty"]
+    var myArray = Array<AnyObject> ()
     
     
     //FALTAN PAR DE VALORES
@@ -633,9 +639,57 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     
     @IBAction func searchLicence(sender: AnyObject) {
         
+        let webServicesQuery = WebService.init()
+        webServicesQuery.initiate(1)
+
+        dictionaryQuery = webServicesQuery.printQueryPerson(numLicenciaSearch.text!)
         
+        //put first query for success key
+        //print(dictionaryQuery.first!.1)
+        vehicle = dictionaryQuery.first!.1
+        
+        //put vehile list into array of anyobjects because vehicle is an anyobject dictionary
+        //print(vehicle!["VehicleList"].debugDescription)
+        
+        myArray = (vehicle?["PersonList"])! as! Array<AnyObject>
+        
+        if myArray.count != 0 {
+            //print("Here's the second item",myArray[0])
+            
+            //put first value of array into dictionaries which is just a single dictionary
+            
+            dictionaries = myArray[0] as! Dictionary<String, AnyObject>
+            
+            
+            print("here's the third item", dictionaries)
+            
+            
+            print(dictionaries)
+            
+            let alertController = UIAlertController(title: "Persona encontrado!", message:
+                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+    
+        }
+        else{
+            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
+                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        
+        
+        
+    }
+
+
         
     }
     
     
-}
+

@@ -29,6 +29,11 @@ class WebService : NSObject{
     func printQuery(numDeTablilla: String ) -> Dictionary<String,AnyObject>{
         return WebService.get(url + Methods.ListVehicleByPlateNumber + "/" + numDeTablilla)
     }
+    func printQueryPerson(numDeLicencia: String ) -> Dictionary<String,AnyObject>{
+        return WebService.get(url + Methods.ListPersonByLicencieNumber + "/" + numDeLicencia)
+    }
+
+    
     
     
     //******************************************* GETS Dictionary Functions **************************************************

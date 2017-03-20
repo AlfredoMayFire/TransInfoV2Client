@@ -62,6 +62,7 @@ extension WebService {
         static let vehicleType = "/vehicleTypes"
         static let vehicleJurisdictions = "/vehicleJurisdictions"
         static let ListVehicleByPlateNumber = "/ListVehicleByPlateNumber"
+        static let ListPersonByLicencieNumber = "/ListPersonByLicencieNumber"
         // Vehicle Tab
         static let bodyTypes = "/bodyTypes"
         static let specialFunctions = "/specialFunctions"

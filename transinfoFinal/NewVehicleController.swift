@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Foundation
 
 class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     
@@ -49,10 +50,16 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         "fechaExpiracion": "",
         "isUpdate": "no"
         ]
+    var dictionaryQuery = [String:AnyObject] ()
+    var content = String()
+    var finalContent = [String:String] ()
+    var vehicle: AnyObject?
+    var dictionaries: Dictionary<String,AnyObject> = ["vacio":"empty"]
 
     var objectNum = Int()
     var isUpdating = false
 
+    var myArray = Array<AnyObject> ()
     
     @IBAction func fechaCompraField(sender: UITextField) {
         let datePickerView:UIDatePicker = UIDatePicker()
@@ -204,6 +211,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
 //        }
 //        
 //        
+        search.text = "123"
         
     }
     
@@ -471,14 +479,70 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     
 
     @IBAction func searchTablilla(sender: AnyObject) {
+      
+        
         let webServicesQuery = WebService.init()
         webServicesQuery.initiate(1)
-        
-        // arrayList = webServicesObject.arrayOfDictionaries("ListVehicleByPlateNumber")
         print(webServicesQuery.printQuery(search.text!))
-        
-        
+        print("Here's your value: ")
 
+        dictionaryQuery = webServicesQuery.printQuery(search.text!)
+        
+        //put first query for success key
+        //print(dictionaryQuery.first!.1)
+        vehicle = dictionaryQuery.first!.1
+        
+        //put vehile list into array of anyobjects because vehicle is an anyobject dictionary
+        //print(vehicle!["VehicleList"].debugDescription)
+        
+        myArray = (vehicle?["VehicleList"])! as! Array<AnyObject>
+        
+        if myArray.count != 0 {
+            //print("Here's the second item",myArray[0])
+            
+            //put first value of array into dictionaries which is just a single dictionary
+            
+            dictionaries = myArray[0] as! Dictionary<String, AnyObject>
+            
+            
+            print("here's the third item", dictionaries)
+            
+            
+            print(dictionaries["vehicleJurisdiction"])
+            
+            let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
+                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            jurisdictionVehicleField.text = dictionaries["vehicleJurisdiction"] as? String
+            numeroDeTablilla.text = dictionaries["plateNumber"] as? String
+            estadoField.text = dictionaries["state"] as? String
+            typeVehicleField.text = dictionaries["vehicleType"] as? String
+            VINField.text = dictionaries["vin"] as? String
+            marcaField.text = dictionaries["make"] as? String
+            modeloField.text = dictionaries["modelos"] as? String
+            numeroDeMarbete.text = dictionaries["registrationNumber"] as? String
+            aseguradoraField.text = dictionaries["insuranceCOmpany"] as? String
+            fechaCompraField.text = dictionaries["purchaseDate"] as? String
+            fechaExpiracionField.text = dictionaries["expirationDate"] as? String
+            yearField.text = dictionaries["year"] as? String
+            
+            
+        }
+        else{
+            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
+                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        
+        
+        
     }
     
     
