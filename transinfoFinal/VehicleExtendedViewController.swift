@@ -74,7 +74,7 @@ class VehicleExtendedViewController: UIViewController{
     var dictionary: [String:String] = [
         "numDeTablilla" :"",
         "marca" :"",
-        "modelo" :"",
+        "model" :"",
         "year": "",
         "tipoVehiculoMotor": "",
         "direccionDeViaje": "",
@@ -518,7 +518,7 @@ class VehicleExtendedViewController: UIViewController{
        numberTablillaField.text = dictionary["numDeTablilla"]
         yearField.text = dictionary["year"]
         marcaField.text = dictionary["marca"]
-        modelField.text = dictionary["modelo"]
+        modelField.text = dictionary["model"]
         
          typeVehicleField.text = dictionary["tipoVehiculoMotor"]
          direccionViajeField.text = dictionary["direccionDeViaje"]

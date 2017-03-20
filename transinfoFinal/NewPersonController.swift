@@ -584,8 +584,13 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
 //            print("Fetch Failed")
 //        }
  
-        if let detailsVC = segue.destinationViewController as? DataEntryTableViewController{
-            detailsVC.tableView.reloadData()
+        
+       
+        dictionary1["genero"] = dictionaries["gender"] as? String
+        dictionary1["name"] = dictionaries["name"] as? String
+
+        if let detailsVC = segue.destinationViewController as? PersonExtendedViewController{
+            detailsVC.dictionary = self.dictionary1
             //print("Leaving VC")
         
 
@@ -666,20 +671,21 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
             
             print(dictionaries)
             
-            let alertController = UIAlertController(title: "Persona encontrado!", message:
-                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
+//            let alertController = UIAlertController(title: "Persona encontrado!", message:
+//                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
+            performSegueWithIdentifier("FoundPerson", sender: self)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
-    
         }
         else{
-            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
-                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+//            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
+//                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
         
@@ -687,7 +693,8 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         
     }
 
-
+    @IBAction func unwindToPerson(segue: UIStoryboardSegue) {
+    }
         
     }
     

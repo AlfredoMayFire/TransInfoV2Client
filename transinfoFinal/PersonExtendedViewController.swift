@@ -103,6 +103,19 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         "locationWhenCollision": "",
         ]
     
+    var dictionary1: [String:String] = [
+        "categoriaPerson" :"",
+        "genero" :"",
+        "license" :"",
+        "organDonor": "",
+        "tipoPersona" :"",
+        "ciudad" :"",
+        "state" :"",
+        "transportedBy": "",
+        "name" :"",
+        ]
+    
+    
     var objectNum = Int()
     var isUpdating = false
     
@@ -169,10 +182,10 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         let webServicesObject = WebService.init()
         webServicesObject.initiate(4)
         
-        nameField.text = dictionary["name"]
-        categoriaPersonField.text = dictionary["categoriaPersona"]
-        typePersonField.text = dictionary["tipoPersona"]
-        genderField.text = dictionary["genero"]
+        nameField.text = dictionary1["name"]
+        categoriaPersonField.text = dictionary1["categoriaPersona"]
+        typePersonField.text = dictionary1["tipoPersona"]
+        genderField.text = dictionary1["genero"]
         
         rowField.isKeyboardHidden = true
         rowField.isDismissWhenSelected = true
@@ -407,6 +420,8 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //        
         listVehiculos.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
         listaInfracciones.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        nameField.text = dictionary["name"]
+        genderField.text = dictionary["genero"]
 
     }
     
@@ -733,6 +748,8 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         webServicesObjectPOST1.sendPOSTs(5)
         
+        performSegueWithIdentifier("PersonReturnToTable", sender: self)
+        
     }
 
     
@@ -964,6 +981,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         listaInfracciones.endUpdates()
     }
 
+    
     
     
 }

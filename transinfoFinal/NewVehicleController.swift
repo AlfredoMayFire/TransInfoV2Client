@@ -429,8 +429,13 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         
         
 //        if segue.identifier == "exitToDataEntry"{
-            if let detailsVC = segue.destinationViewController as? DataEntryTableViewController{
-            detailsVC.tableView.reloadData()
+        
+            dictionary["numDeTablilla"] = numeroDeTablilla.text
+        dictionary["model"] = modeloField.text
+        dictionary["marca"] = marcaField.text
+        dictionary["year"] = yearField.text
+            if let detailsVC = segue.destinationViewController as? VehicleExtendedViewController{
+            detailsVC.dictionary = self.dictionary
            // print("Leaving VC")
             objectNum = 0
             isUpdating = false
@@ -509,13 +514,13 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             
             
             print(dictionaries["vehicleJurisdiction"])
-            
-            let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
-                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+//            
+//            let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
+//                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
             
             jurisdictionVehicleField.text = dictionaries["vehicleJurisdiction"] as? String
             numeroDeTablilla.text = dictionaries["plateNumber"] as? String
@@ -530,14 +535,14 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             fechaExpiracionField.text = dictionaries["expirationDate"] as? String
             yearField.text = dictionaries["year"] as? String
             
-            
+            performSegueWithIdentifier("FoundVehicle", sender: self)
         }
         else{
-            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
-                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+//            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
+//                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
         
