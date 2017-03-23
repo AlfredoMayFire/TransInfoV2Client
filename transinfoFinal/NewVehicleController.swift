@@ -146,71 +146,71 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         
         
         
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let request = NSFetchRequest(entityName: "PageFour")
-//        
-//        do {
-//            
-//            
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            
-//            if objectNum == 0 {
-//                objectNum = results.count + 1
-//            }
-//            if (objectNum == 0 && results.count == 1){
-//                objectNum = results.count + 1
-//            }//error aqui
-//          //  print("This here is the objectNum being used: ",objectNum)
-//    
-//            
-//            
-//            //print("Here is objectNum again",objectNum)
-//            
-//           // print("Here is result count",results.count)
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    
-////                    if (result.valueForKey("objectNum") as? Int == 0){
-////                        context.deleteObject(result)
-////                        do{
-////                            try context.save()
-////                            print("did it")
-////                        }catch{
-////                            print("couldn't do it")
-////                        }
-////
-////                        
-////                    }
-//                    
-////                    print("Here is the object IDs",result.valueForKey("objectNum"))
-//                     if let idHolder = objectNum as? Int{
-//                        if idHolder == result.valueForKey("objectNum") as? Int{
-//                            
-//                            print("is updating")
-//                            isUpdating = true
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "PageFour")
+        
+        do {
+            
+            
+            let results = try context.executeFetchRequest(request)
+            
+            
+            
+            if objectNum == 0 {
+                objectNum = results.count + 1
+            }
+            if (objectNum == 0 && results.count == 1){
+                objectNum = results.count + 1
+            }//error aqui
+          //  print("This here is the objectNum being used: ",objectNum)
+    
+            
+            
+            //print("Here is objectNum again",objectNum)
+            
+           // print("Here is result count",results.count)
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+//                    if (result.valueForKey("objectNum") as? Int == 0){
+//                        context.deleteObject(result)
+//                        do{
+//                            try context.save()
+//                            print("did it")
+//                        }catch{
+//                            print("couldn't do it")
 //                        }
+//
+//                        
 //                    }
-//                    
-////                    print("here is core data objectNum",result.valueForKey("objectNum") as? Int)
-//                    //                    if result.valueForKey("objectNum") as? Int == objectNum {
-//                    //                        updatingTrue = true
-//                    //                        print("yes")
-//                    //                    }
-//                    
-//                    
-//                }
-//            }
-//        }catch{
-//            print("Error")
-//        }
-//        
-//        
+                    
+//                    print("Here is the object IDs",result.valueForKey("objectNum"))
+                     if let idHolder = objectNum as? Int{
+                        if idHolder == result.valueForKey("objectNum") as? Int{
+                            
+                            print("is updating")
+                            isUpdating = true
+                        }
+                    }
+                    
+//                    print("here is core data objectNum",result.valueForKey("objectNum") as? Int)
+                    //                    if result.valueForKey("objectNum") as? Int == objectNum {
+                    //                        updatingTrue = true
+                    //                        print("yes")
+                    //                    }
+                    
+                    
+                }
+            }
+        }catch{
+            print("Error")
+        }
+        
+        
         search.text = "123"
         
     }
@@ -231,199 +231,199 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageFour", inManagedObjectContext: context)
-//        
-//        
-//        if isUpdating {
-//         
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageFour", inManagedObjectContext: context)
+        
+        
+        if isUpdating {
+         
+            do {
+                let request = NSFetchRequest(entityName: "PageFour")
+                
+                //request.predicate = NSPredicate(format: "objectNum = %@", "objectNum")
+                
+                let results = try context.executeFetchRequest(request)
+                
+                
+                //print(results.count)
+                
+                
+                
+                if results.count > 0 {
+                
+                    for result in results as! [NSManagedObject] {
+//                        print("Time # ",result)
+//                        context.deleteObject(result)
+                        print("Here is objectNum: ",objectNum)
+                        print(result.valueForKey("objectNum"))
+                        if result.valueForKey("objectNum") as? Int == objectNum {
+                            print("Entre")
+                            result.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
+                            result.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
+                            result.setValue(ocupantesField.text,forKey: "ocupantes")
+                            result.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
+                            result.setValue(estadoField.text,forKey:"estadoField")
+                            result.setValue(VINField.text,forKey:"vinField")
+                            result.setValue(yearField.text,forKey:"yearField")
+                            result.setValue(marcaField.text,forKey:"marcaField")
+                            result.setValue(modeloField.text,forKey:"modeloField")
+                            result.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
+                            result.setValue(aseguradoraField.text,forKey:"aseguradoraField")
+                            
+                            result.setValue(fechaCompraField.text,forKey:"fechaCompraField")
+                            result.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
+                            result.setValue(objectNum, forKey: "objectNum")
+                            if result.valueForKey("objectNum") as? Int == 0 {
+                                context.deleteObject(result)
+                                do{
+                                    try context.save()
+                                    print("did it")
+                                }catch{
+                                    print("couldn't do it")
+                                }
+                                
+                            
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                }
+                do {
+                    
+                    try context.save()
+                    print("Vehicle Saved")
+                    
+                } catch {
+                    
+                    print("There was a problem!")
+                    
+                }
+
+            }catch{
+                print("Error")
+            }
+
+        }
+        
+        else{
+            
+            
+            newData.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
+            newData.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
+           // newData.setValue(ocupantesField.text,forKey: "ocupantes")
+            newData.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
+            newData.setValue(estadoField.text,forKey:"estadoField")
+            newData.setValue(VINField.text,forKey:"vinField")
+            newData.setValue(yearField.text,forKey:"yearField")
+            newData.setValue(marcaField.text,forKey:"marcaField")
+            newData.setValue(modeloField.text,forKey:"modeloField")
+            newData.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
+            newData.setValue(aseguradoraField.text,forKey:"aseguradoraField")
+            
+            newData.setValue(fechaCompraField.text,forKey:"fechaCompraField")
+            newData.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
+            newData.setValue(objectNum, forKey: "objectNum")
+            
+            let request = NSFetchRequest(entityName: "PageFour")
+            
+            
+            
+            request.returnsObjectsAsFaults = false
+            do {
+                
+                try context.save()
+                print("Vehicle Saved")
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            
+            //onlynecessaryifneedresults
 //            do {
-//                let request = NSFetchRequest(entityName: "PageFour")
-//                
-//                //request.predicate = NSPredicate(format: "objectNum = %@", "objectNum")
-//                
 //                let results = try context.executeFetchRequest(request)
-//                
-//                
-//                //print(results.count)
 //                
 //                
 //                
 //                if results.count > 0 {
-//                
+//                    
 //                    for result in results as! [NSManagedObject] {
-////                        print("Time # ",result)
-////                        context.deleteObject(result)
-//                        print("Here is objectNum: ",objectNum)
-//                        print(result.valueForKey("objectNum"))
-//                        if result.valueForKey("objectNum") as? Int == objectNum {
-//                            print("Entre")
-//                            result.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
-//                            result.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
-//                            result.setValue(ocupantesField.text,forKey: "ocupantes")
-//                            result.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
-//                            result.setValue(estadoField.text,forKey:"estadoField")
-//                            result.setValue(VINField.text,forKey:"vinField")
-//                            result.setValue(yearField.text,forKey:"yearField")
-//                            result.setValue(marcaField.text,forKey:"marcaField")
-//                            result.setValue(modeloField.text,forKey:"modeloField")
-//                            result.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
-//                            result.setValue(aseguradoraField.text,forKey:"aseguradoraField")
-//                            
-//                            result.setValue(fechaCompraField.text,forKey:"fechaCompraField")
-//                            result.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
-//                            result.setValue(objectNum, forKey: "objectNum")
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                    print("did it")
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                                
-//                            
-//                                
-//                            }
-//                        }
-//                        
+//                        print("For object #",result.valueForKey("objectNum")!)
+//                        print(result.valueForKey("vinField")!)
+//                        print(result.valueForKey("yearField")!)
+//                        print(result.valueForKey("tipoVehiculo")!)
+//                        print(result.valueForKey("jurisdicionVehiculo")!)
+//                        print(result.valueForKey("ocupantes")!)
+//                        print(result.valueForKey("numDeTablilla")!)
+//                        print(result.valueForKey("estadoField")!)
+//                        print(result.valueForKey("marcaField")!)
+//                        print(result.valueForKey("modeloField")!)
+//                        print(result.valueForKey("numeroDeMarbete")!)
+//                        print(result.valueForKey("aseguradoraField")!)
+//                        print(result.valueForKey("fechaCompraField")!)
+//                        print(result.valueForKey("fechaExpiracionField")!)
 //                        
 //                    }
-//                }
-//                do {
-//                    
-//                    try context.save()
-//                    print("Vehicle Saved")
-//                    
-//                } catch {
-//                    
-//                    print("There was a problem!")
 //                    
 //                }
-//
-//            }catch{
-//                print("Error")
-//            }
-//
-//        }
-//        
-//        else{
-//            
-//            
-//            newData.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
-//            newData.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
-//            newData.setValue(ocupantesField.text,forKey: "ocupantes")
-//            newData.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
-//            newData.setValue(estadoField.text,forKey:"estadoField")
-//            newData.setValue(VINField.text,forKey:"vinField")
-//            newData.setValue(yearField.text,forKey:"yearField")
-//            newData.setValue(marcaField.text,forKey:"marcaField")
-//            newData.setValue(modeloField.text,forKey:"modeloField")
-//            newData.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
-//            newData.setValue(aseguradoraField.text,forKey:"aseguradoraField")
-//            
-//            newData.setValue(fechaCompraField.text,forKey:"fechaCompraField")
-//            newData.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
-//            newData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let request = NSFetchRequest(entityName: "PageFour")
-//            
-//            
-//            
-//            request.returnsObjectsAsFaults = false
-//            do {
-//                
-//                try context.save()
-//                print("Vehicle Saved")
 //                
 //            } catch {
 //                
-//                print("There was a problem!")
-//                
+//                print("Fetch Failed")
 //            }
-//            
-//            //onlynecessaryifneedresults
-////            do {
-////                let results = try context.executeFetchRequest(request)
-////                
-////                
-////                
-////                if results.count > 0 {
-////                    
-////                    for result in results as! [NSManagedObject] {
-////                        print("For object #",result.valueForKey("objectNum")!)
-////                        print(result.valueForKey("vinField")!)
-////                        print(result.valueForKey("yearField")!)
-////                        print(result.valueForKey("tipoVehiculo")!)
-////                        print(result.valueForKey("jurisdicionVehiculo")!)
-////                        print(result.valueForKey("ocupantes")!)
-////                        print(result.valueForKey("numDeTablilla")!)
-////                        print(result.valueForKey("estadoField")!)
-////                        print(result.valueForKey("marcaField")!)
-////                        print(result.valueForKey("modeloField")!)
-////                        print(result.valueForKey("numeroDeMarbete")!)
-////                        print(result.valueForKey("aseguradoraField")!)
-////                        print(result.valueForKey("fechaCompraField")!)
-////                        print(result.valueForKey("fechaExpiracionField")!)
-////                        
-////                    }
-////                    
-////                }
-////                
-////            } catch {
-////                
-////                print("Fetch Failed")
-////            }
-//        }
-//        
-//        
-//        let request = NSFetchRequest(entityName: "PageFour")
-//        request.returnsObjectsAsFaults = false
-//
-//        
-//        do {
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    print("For object #",result.valueForKey("objectNum")!)
-////                    print(result.valueForKey("vinField")!)
-////                    print(result.valueForKey("yearField")!)
-////                    print(result.valueForKey("tipoVehiculo")!)
-////                    print(result.valueForKey("jurisdicionVehiculo")!)
-////                    print(result.valueForKey("ocupantes")!)
-////                    print(result.valueForKey("numDeTablilla")!)
-////                    print(result.valueForKey("estadoField")!)
-////                    print(result.valueForKey("marcaField")!)
-////                    print(result.valueForKey("modeloField")!)
-////                    print(result.valueForKey("numeroDeMarbete")!)
-////                    print(result.valueForKey("aseguradoraField")!)
-////                    print(result.valueForKey("fechaCompraField")!)
-////                    print(result.valueForKey("fechaExpiracionField")!)
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//                    }
-//                    
-//                }
-//                
-//            }
-//            
-//        }catch {
-//            
-//            print("Fetch Failed")
-//        }
+        }
+        
+        
+        let request = NSFetchRequest(entityName: "PageFour")
+        request.returnsObjectsAsFaults = false
+
+        
+        do {
+            let results = try context.executeFetchRequest(request)
+            
+            
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    print("For object #",result.valueForKey("objectNum")!)
+//                    print(result.valueForKey("vinField")!)
+//                    print(result.valueForKey("yearField")!)
+//                    print(result.valueForKey("tipoVehiculo")!)
+//                    print(result.valueForKey("jurisdicionVehiculo")!)
+//                    print(result.valueForKey("ocupantes")!)
+//                    print(result.valueForKey("numDeTablilla")!)
+//                    print(result.valueForKey("estadoField")!)
+//                    print(result.valueForKey("marcaField")!)
+//                    print(result.valueForKey("modeloField")!)
+//                    print(result.valueForKey("numeroDeMarbete")!)
+//                    print(result.valueForKey("aseguradoraField")!)
+//                    print(result.valueForKey("fechaCompraField")!)
+//                    print(result.valueForKey("fechaExpiracionField")!)
+                    if (result.valueForKey("objectNum") as? Int == 0){
+                        context.deleteObject(result)
+                        do{
+                            try context.save()
+                            print("did it")
+                        }catch{
+                            print("couldn't do it")
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+        }catch {
+            
+            print("Fetch Failed")
+        }
 
         
         
@@ -515,12 +515,12 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             
             print(dictionaries["vehicleJurisdiction"])
 //            
-//            let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
-//                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
+                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: foundVehicle))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
             
             jurisdictionVehicleField.text = dictionaries["vehicleJurisdiction"] as? String
             numeroDeTablilla.text = dictionaries["plateNumber"] as? String
@@ -535,14 +535,14 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             fechaExpiracionField.text = dictionaries["expirationDate"] as? String
             yearField.text = dictionaries["year"] as? String
             
-            performSegueWithIdentifier("FoundVehicle", sender: self)
+            
         }
         else{
-//            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
-//                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
+                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
         
@@ -622,6 +622,20 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         tableView.endUpdates()
     }
     
-
-    
+    func foundVehicle(action: UIAlertAction){
+        performSegueWithIdentifier("exitToDataEntry", sender: self)
+//        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
+//        
+//        // Creating a navigation controller with viewController at the root of the navigation stack.
+//        let navController = UINavigationController(rootViewController: viewController)
+//        self.presentViewController(navController, animated:true, completion: nil)
+//        
+//    }
+        
+        
+        
+//        let VC1 = self.storyboard!.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
+//        self.navigationController!.pushViewController(VC1, animated: true)
+//    
+    }
 }

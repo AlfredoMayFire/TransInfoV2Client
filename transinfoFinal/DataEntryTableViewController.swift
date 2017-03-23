@@ -20,6 +20,8 @@ class DataEntryTableViewController: UITableViewController{
     
     var person = [NSManagedObject]()
     
+    var object = [NSManagedObject]()
+    
     let section = ["Vehicles", "People"]
     
     //let  array: [Any] = []
@@ -91,72 +93,70 @@ class DataEntryTableViewController: UITableViewController{
         super.viewWillAppear(animated)
         
         //1
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        
-//        
-//        //2
-//
-//        if oneOrOther {
-//            let fetchRequest = NSFetchRequest(entityName: "PageThree")//person
-//            
-//            do {
-//                let results = try managedContext.executeFetchRequest(fetchRequest)
-//                object = results as! [NSManagedObject]
-//                
-//            } catch let error as NSError {
-//                print("Could not fetch \(error), \(error.userInfo)")
-//            }
-//
-//        }
-//        else{
-//            
-//            let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
-//            
-//            do {
-//                let results = try managedContext.executeFetchRequest(fetchRequest)
-//                object = results as! [NSManagedObject]
-//                
-//            } catch let error as NSError {
-//                print("Could not fetch \(error), \(error.userInfo)")
-//            }
-//
-//        }
-//        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        
+        //2
+
+        if oneOrOther {
+            let fetchRequest = NSFetchRequest(entityName: "PageThree")//person
+            
+            do {
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                object = results as! [NSManagedObject]
+                
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+
+        }
+        else{
+            
+            let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
+            
+            do {
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                object = results as! [NSManagedObject]
+                
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+
+        }
+        
         
         items[1].removeAll()//vacia people
         items[0].removeAll()//vacia vehiculo
         
         
-//        let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
-//        
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            vehicle = results as! [NSManagedObject]
-//            for count in results{
-//                items[0].append((count.valueForKey("numDeTablilla")as? String)!)
-//            }
-//        
-//            } catch let error as NSError {
-//                print("Could not fetch \(error), \(error.userInfo)")
-//            }
-//        let fetchRequests = NSFetchRequest(entityName: "PageThree")//person
-//        
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequests)
-//            person = results as! [NSManagedObject]
-//            for count in results{
-//                items[1].append((count.valueForKey("name") as? String)!)
-//            }
-//            
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//        
-//        
-//        person
-//        person.count
+        let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            vehicle = results as! [NSManagedObject]
+            for count in results{
+                items[0].append((count.valueForKey("numDeTablilla")as? String)!)
+            }
+        
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+        let fetchRequests = NSFetchRequest(entityName: "PageThree")//person
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequests)
+            person = results as! [NSManagedObject]
+            for count in results{
+                items[1].append((count.valueForKey("name") as? String)!)
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        
 
        listaMiembros.reloadData()
         
@@ -171,38 +171,36 @@ class DataEntryTableViewController: UITableViewController{
     
     
     @IBAction func refresh(){
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//
-//        let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
-//        
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            vehicle = results as! [NSManagedObject]
-//            for count in results{
-//                items[0].append((count.valueForKey("numDeTablilla")as? String)!)
-//            }
-//            
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//        let fetchRequests = NSFetchRequest(entityName: "PageThree")//person
-//        
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequests)
-//            person = results as! [NSManagedObject]
-//            for count in results{
-//                items[1].append((count.valueForKey("name") as? String)!)
-//            }
-//            
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        //        person
-        //        person.count
+        let managedContext = appDelegate.managedObjectContext
+
+        let fetchRequest = NSFetchRequest(entityName: "PageFour")//vehicle
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            vehicle = results as! [NSManagedObject]
+            for count in results{
+                items[0].append((count.valueForKey("numDeTablilla")as? String)!)
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        let fetchRequests = NSFetchRequest(entityName: "PageThree")//person
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequests)
+            person = results as! [NSManagedObject]
+            for count in results{
+                items[1].append((count.valueForKey("name") as? String)!)
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        
         
         listaMiembros.reloadData()
         
@@ -223,17 +221,17 @@ class DataEntryTableViewController: UITableViewController{
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
         
-//       
-//        if indexPath.section == 0{
-//        let vehicles = vehicle[indexPath.row]
-//        cell!.textLabel!.text = vehicles.valueForKey("numDeTablilla") as? String
-//        }
-//        else{
-//            let persons = person[indexPath.row]
-//            cell!.textLabel!.text = persons.valueForKey("name") as? String
-//
-//        }
-//        
+       
+        if indexPath.section == 0{
+        let vehicles = vehicle[indexPath.row]
+        cell!.textLabel!.text = vehicles.valueForKey("numDeTablilla") as? String
+        }
+        else{
+            let persons = person[indexPath.row]
+            cell!.textLabel!.text = persons.valueForKey("name") as? String
+
+        }
+        
         
        
         
@@ -249,6 +247,8 @@ class DataEntryTableViewController: UITableViewController{
         
         
         objectNum = cellIndex + 1
+        
+        performSegueWithIdentifier("extendedVehicle", sender: self)
         
 //        if indexPath?.section == 0{
 //            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -365,14 +365,14 @@ class DataEntryTableViewController: UITableViewController{
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
-        return 0//self.section.count
+        return self.section.count
         
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return 0//self.items[section].count
+        return self.items[section].count
         
     }
     

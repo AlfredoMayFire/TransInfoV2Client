@@ -148,87 +148,87 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         nombreField.text = dictionary1["name"]
         
         
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        let requests = NSFetchRequest(entityName: "PageThree")
+        
+        do {
+            
+            
+            let results = try context.executeFetchRequest(requests)
+            
+            
+            
+            if objectNum == 0 {
+                objectNum = results.count + 1
+            }
+            if (objectNum == 0 && results.count == 1){
+                objectNum = results.count + 1
+            }
+            //print("This here is the objectNum being used: ",objectNum)
+            
+            
+            
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+//                print("Here is the object IDs",result.valueForKey("objectNum"))
+                    if let idHolder = objectNum as? Int{
+                        if idHolder == result.valueForKey("objectNum") as? Int{
+                            
+                            print("is updating")
+                            isUpdating = true
+                        }
+                    }
+                }
+            }
+        }catch{
+            print("Error")
+        }
+    
+        
+        
 //        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 //        
 //        let context: NSManagedObjectContext = appDel.managedObjectContext
 //        
-//        let requests = NSFetchRequest(entityName: "PageThree")
-//        
-//        do {
-//            
-//            
-//            let results = try context.executeFetchRequest(requests)
-//            
-//            
-//            
-//            if objectNum == 0 {
-//                objectNum = results.count + 1
-//            }
-//            if (objectNum == 0 && results.count == 1){
-//                objectNum = results.count + 1
-//            }
-//            //print("This here is the objectNum being used: ",objectNum)
-//            
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    
-////                print("Here is the object IDs",result.valueForKey("objectNum"))
-//                    if let idHolder = objectNum as? Int{
-//                        if idHolder == result.valueForKey("objectNum") as? Int{
-//                            
-//                            print("is updating")
-//                            isUpdating = true
-//                        }
-//                    }
-//                }
-//            }
-//        }catch{
-//            print("Error")
-//        }
-//    
-//        
-//        
-////        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-////        
-////        let context: NSManagedObjectContext = appDel.managedObjectContext
-////        
-//        let request = NSFetchRequest(entityName: "PageFour")
-//        
-//        //let departmentSort = NSSortDescriptor(key: "numDeTablilla", ascending: true)
-//        request.sortDescriptors = []
-//        //let moc = dataController.managedObjectContext
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context,sectionNameKeyPath: "numDeTablilla", cacheName: "rootCache")
-//        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
-//
+        let request = NSFetchRequest(entityName: "PageFour")
+        
+        //let departmentSort = NSSortDescriptor(key: "numDeTablilla", ascending: true)
+        request.sortDescriptors = []
+        //let moc = dataController.managedObjectContext
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context,sectionNameKeyPath: "numDeTablilla", cacheName: "rootCache")
+        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        
-//        //2
-//        
-//        
-//        let fetchRequest = NSFetchRequest(entityName: "PageFour")
-//        
-//        //3
-//        do {
-//        let results = try managedContext.executeFetchRequest(fetchRequest)
-//        object = results as! [NSManagedObject]
-//        } catch let error as NSError {
-//        print("Could not fetch \(error), \(error.userInfo)")
-//        }
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        
+        
+        let fetchRequest = NSFetchRequest(entityName: "PageFour")
+        
+        //3
+        do {
+        let results = try managedContext.executeFetchRequest(fetchRequest)
+        object = results as! [NSManagedObject]
+        } catch let error as NSError {
+        print("Could not fetch \(error), \(error.userInfo)")
+        }
 
     }
     
@@ -462,127 +462,127 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageThree", inManagedObjectContext: context)
-//        
-//        if isUpdating{
-//            do{
-//            let request = NSFetchRequest(entityName: "PageThree")
-//            
-//            //request.predicate = NSPredicate(format: "objectNum = %@", "objectNum")
-//            
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            //print(results.count)
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    //                        print("Time # ",result)
-//                    //                        context.deleteObject(result)
-//                    //print("Here is objectNum: ",objectNum)
-//                   // print(result.valueForKey("objectNum"))
-//                    if result.valueForKey("objectNum") as? Int == objectNum {
-//                      
-//                        result.setValue(categoriaPerson.text,forKey:"categoriaPerson")
-//                        result.setValue(generoField.text,forKey:"genero")
-//                        result.setValue(driverLicence.text,forKey:"license")
-//                        result.setValue(organDonor.text,forKey:"organDonor")
-//                        result.setValue(personType.text, forKey: "tipoPersona")
-//                        result.setValue(city.text, forKey: "ciudad")
-//                        result.setValue(state.text, forKey: "state")
-//                        result.setValue(transportedBy.text, forKey: "transportedBy")
-//                        result.setValue(nombreField.text, forKey: "name")
-//                        result.setValue(objectNum, forKey: "objectNum")
-//                        if result.valueForKey("objectNum") as? Int == 0 {
-//                            context.deleteObject(result)
-//                            do{
-//                                try context.save()
-//                                print("did it")
-//                            }catch{
-//                                print("couldn't do it")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            do {
-//                
-//                try context.save()
-//                print("Vehicle Saved")
-//                
-//            } catch {
-//                
-//                print("There was a problem!")
-//                
-//            }
-//            
-//        }catch{
-//            print("Error")
-//        }
-//
-//    }
-//    
-//    else{
-//            newData.setValue(categoriaPerson.text,forKey:"categoriaPerson")
-//            newData.setValue(generoField.text,forKey:"genero")
-//            newData.setValue(driverLicence.text,forKey:"license")
-//            newData.setValue(organDonor.text,forKey:"organDonor")
-//            newData.setValue(personType.text, forKey: "tipoPersona")
-//            newData.setValue(city.text, forKey: "ciudad")
-//            newData.setValue(state.text, forKey: "state")
-//            newData.setValue(transportedBy.text, forKey: "transportedBy")
-//            newData.setValue(nombreField.text, forKey: "name")
-//            newData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let request = NSFetchRequest(entityName: "PageThree")
-//            request.returnsObjectsAsFaults = false
-//            do {
-//                
-//                try context.save()
-//                
-//            } catch {
-//                
-//                print("There was a problem!")
-//                
-//            }
-//        }
-//        
-//        //Cleanup
-//        let request = NSFetchRequest(entityName: "PageThree")
-//        request.returnsObjectsAsFaults = false
-//        do {
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//                    }
-//                    
-//                }
-//                
-//            }
-//            
-//        }catch {
-//            
-//            print("Fetch Failed")
-//        }
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageThree", inManagedObjectContext: context)
+        
+        if isUpdating{
+            do{
+            let request = NSFetchRequest(entityName: "PageThree")
+            
+            //request.predicate = NSPredicate(format: "objectNum = %@", "objectNum")
+            
+            let results = try context.executeFetchRequest(request)
+            
+            
+            //print(results.count)
+            
+            
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    //                        print("Time # ",result)
+                    //                        context.deleteObject(result)
+                    //print("Here is objectNum: ",objectNum)
+                   // print(result.valueForKey("objectNum"))
+                    if result.valueForKey("objectNum") as? Int == objectNum {
+                      
+                        //result.setValue(categoriaPerson.text,forKey:"categoriaPerson")
+                        result.setValue(generoField.text,forKey:"genero")
+                        result.setValue(driverLicence.text,forKey:"license")
+                        result.setValue(organDonor.text,forKey:"organDonor")
+                        //result.setValue(personType.text, forKey: "tipoPersona")
+                        result.setValue(city.text, forKey: "ciudad")
+                        result.setValue(state.text, forKey: "state")
+                        //result.setValue(transportedBy.text, forKey: "transportedBy")
+                        result.setValue(nombreField.text, forKey: "name")
+                        result.setValue(objectNum, forKey: "objectNum")
+                        if result.valueForKey("objectNum") as? Int == 0 {
+                            context.deleteObject(result)
+                            do{
+                                try context.save()
+                                print("did it")
+                            }catch{
+                                print("couldn't do it")
+                            }
+                        }
+                    }
+                }
+            }
+            do {
+                
+                try context.save()
+                print("Vehicle Saved")
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            
+        }catch{
+            print("Error")
+        }
+
+    }
+    
+    else{
+           // newData.setValue(categoriaPerson.text,forKey:"categoriaPerson")
+            newData.setValue(generoField.text,forKey:"genero")
+            newData.setValue(driverLicence.text,forKey:"license")
+            newData.setValue(organDonor.text,forKey:"organDonor")
+          //  newData.setValue(personType.text, forKey: "tipoPersona")
+            newData.setValue(city.text, forKey: "ciudad")
+            newData.setValue(state.text, forKey: "state")
+           // newData.setValue(transportedBy.text, forKey: "transportedBy")
+            newData.setValue(nombreField.text, forKey: "name")
+            newData.setValue(objectNum, forKey: "objectNum")
+            
+            let request = NSFetchRequest(entityName: "PageThree")
+            request.returnsObjectsAsFaults = false
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+        }
+        
+        //Cleanup
+        let request = NSFetchRequest(entityName: "PageThree")
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.executeFetchRequest(request)
+            
+            
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    if (result.valueForKey("objectNum") as? Int == 0){
+                        context.deleteObject(result)
+                        do{
+                            try context.save()
+                            print("did it")
+                        }catch{
+                            print("couldn't do it")
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+        }catch {
+            
+            print("Fetch Failed")
+        }
  
         
        
@@ -646,17 +646,37 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         
         let webServicesQuery = WebService.init()
         webServicesQuery.initiate(1)
+        print(numLicenciaSearch.text)
+    
+        if numLicenciaSearch.text == "" {
+//            let alertController = UIAlertController(title: "Invalido!", message:
+//                "El campo de busqueda esta vacio.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//            
+//            self.presentViewController(alertController, animated: true, completion: nil)
+            myArray.append(dictionary1)
+            myArray.removeAll()
+        }
+        else{
+            dictionaryQuery = webServicesQuery.printQueryPerson(numLicenciaSearch.text!)
+            vehicle = dictionaryQuery.first!.1
+            myArray = (vehicle?["PersonList"])! as! Array<AnyObject>
+        }
 
-        dictionaryQuery = webServicesQuery.printQueryPerson(numLicenciaSearch.text!)
+     
+            
+
+   
         
         //put first query for success key
         //print(dictionaryQuery.first!.1)
-        vehicle = dictionaryQuery.first!.1
+        
+        
         
         //put vehile list into array of anyobjects because vehicle is an anyobject dictionary
         //print(vehicle!["VehicleList"].debugDescription)
         
-        myArray = (vehicle?["PersonList"])! as! Array<AnyObject>
+        
         
         if myArray.count != 0 {
             //print("Here's the second item",myArray[0])
@@ -671,21 +691,32 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
             
             print(dictionaries)
             
-//            let alertController = UIAlertController(title: "Persona encontrado!", message:
-//                "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: nil))
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
-            performSegueWithIdentifier("FoundPerson", sender: self)
+            numLicenciaField.text = dictionaries["licenceNumber"] as? String
+            generoField.text = dictionaries["gender"] as? String
+            organDonor.text = dictionaries["organDonor"] as? String
+            city.text = dictionaries["city"] as? String
+            state.text = dictionaries["stateCountry"] as? String
+            urbanizacionBarrio.text = dictionaries["neighborhood"] as? String
+            calle.text = dictionaries["streetname"] as? String
+            zipCode.text = dictionaries["zipCode"] as? String
+            PhoneNumber.text = dictionaries["phoneNumber"] as? String
+            nombreField.text = dictionaries["name"] as? String
             
+            
+            let alertController = UIAlertController(title: "Persona encontrado!", message:
+                "Escoge Dismiss para buscar de nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: FoundPerson))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            //
         }
         else{
-//            let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
-//                "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "Persona no encontrado!", message:
+            "Entrar informacion para añadir.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
         
@@ -693,6 +724,11 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         
     }
 
+    func FoundPerson(action: UIAlertAction){
+        performSegueWithIdentifier("exit", sender: self)
+
+    }
+    
     @IBAction func unwindToPerson(segue: UIStoryboardSegue) {
     }
         

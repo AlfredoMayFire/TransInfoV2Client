@@ -542,7 +542,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dRt-0g-3nz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X6O-C4-7Bk">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="719"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFi-i2-Ep3">
@@ -950,6 +950,7 @@
                         <outlet property="menuButton" destination="7v1-Um-gSt" id="cn4-TE-xZd"/>
                         <segue destination="y6B-ak-hjx" kind="push" identifier="EditVehicle" id="9nv-1L-DMD"/>
                         <segue destination="4Dh-2u-Ip0" kind="push" identifier="EditPerson" id="cIx-FK-bHu"/>
+                        <segue destination="IQc-yP-dGr" kind="push" identifier="extendedVehicle" id="Rdt-Ca-E81"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVX-Q9-07F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1165,7 +1166,7 @@
                             <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="Guardar:" destination="4Dh-2u-Ip0" id="QBQ-rs-FKg"/>
-                                <segue destination="tC7-f6-1qQ" kind="unwind" unwindAction="unwindToVC:" id="iY7-wm-S3F"/>
+                                <segue destination="tC7-f6-1qQ" kind="unwind" identifier="exit" unwindAction="unwindToVC:" id="iY7-wm-S3F"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1424,6 +1425,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1012" height="710"/>
                     <connections>
@@ -1442,7 +1444,6 @@
                         <outlet property="tableView" destination="TWx-3K-v0g" id="poU-Y9-0xX"/>
                         <outlet property="typeVehicleField" destination="10i-Ay-nf2" id="H0L-zL-Qrf"/>
                         <outlet property="yearField" destination="BdX-mh-GK3" id="xsL-mT-CTB"/>
-                        <segue destination="2xh-g0-owt" kind="push" identifier="FoundVehicle" id="7PG-cB-69V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kzB-zn-gCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1596,7 +1597,7 @@
         <!--Vehículos-->
         <scene sceneID="yfA-QB-CTH">
             <objects>
-                <tableViewController id="IQc-yP-dGr" customClass="VehiclesTableViewController" customModule="transinfoFinal" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VehiclesTableViewController" id="IQc-yP-dGr" customClass="VehiclesTableViewController" customModule="transinfoFinal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MVc-Va-gud">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3621,12 +3622,12 @@
         <image name="road_closure-25" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yRt-xF-PiY"/>
-        <segue reference="jfR-I8-iUe"/>
+        <segue reference="Rdt-Ca-E81"/>
+        <segue reference="f2m-Wq-LpR"/>
         <segue reference="a90-V3-8ey"/>
-        <segue reference="vkf-Pb-Bpn"/>
-        <segue reference="jdc-3d-ca8"/>
+        <segue reference="yRt-xF-PiY"/>
+        <segue reference="9nv-1L-DMD"/>
+        <segue reference="cIx-FK-bHu"/>
         <segue reference="OZL-AG-qyJ"/>
-        <segue reference="7PG-cB-69V"/>
     </inferredMetricsTieBreakers>
 </document>
