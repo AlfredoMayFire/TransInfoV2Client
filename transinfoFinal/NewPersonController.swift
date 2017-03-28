@@ -16,6 +16,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     
     
     
+    @IBOutlet weak var saveSubmit: UIBarButtonItem!
     
     @IBOutlet weak var driverLicence: SwiftDropDownList!
     @IBOutlet weak var generoField: SwiftDropDownList!
@@ -705,7 +706,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
             
             let alertController = UIAlertController(title: "Persona encontrado!", message:
                 "Escoge Dismiss para buscar de nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: willNotUse))
             alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: FoundPerson))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -714,7 +715,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         else{
             let alertController = UIAlertController(title: "Persona no encontrado!", message:
             "Entrar informacion para añadir.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: willNotUse))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
@@ -725,10 +726,15 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     }
 
     func FoundPerson(action: UIAlertAction){
-        performSegueWithIdentifier("exit", sender: self)
+        saveSubmit.title = "Submit"
 
     }
     
+    
+    func willNotUse(action: UIAlertAction){
+        saveSubmit.title  = "guardar"
+        //function to clear out fields
+    }
     @IBAction func unwindToPerson(segue: UIStoryboardSegue) {
     }
         

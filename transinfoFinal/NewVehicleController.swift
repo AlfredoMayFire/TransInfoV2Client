@@ -13,6 +13,7 @@ import Foundation
 class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     
     
+    @IBOutlet weak var saveSubmit: UIBarButtonItem!
     @IBOutlet weak var typeVehicleField: SwiftDropDownList!
     @IBOutlet weak var jurisdictionVehicleField: SwiftDropDownList!
     
@@ -517,7 +518,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
 //            
             let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
                 "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: willNotUse))
             alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: foundVehicle))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -540,7 +541,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         else{
             let alertController = UIAlertController(title: "Vehiculo no encontrado!", message:
                 "Entrar informacion para uno nuevo.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: willNotUse))
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
@@ -623,7 +624,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     func foundVehicle(action: UIAlertAction){
-        performSegueWithIdentifier("exitToDataEntry", sender: self)
+       // performSegueWithIdentifier("exitToDataEntry", sender: self)
 //        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
 //        
 //        // Creating a navigation controller with viewController at the root of the navigation stack.
@@ -637,5 +638,10 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
 //        let VC1 = self.storyboard!.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
 //        self.navigationController!.pushViewController(VC1, animated: true)
 //    
+        saveSubmit.title = "Submit"
+    }
+    
+    func willNotUse(action: UIAlertAction){
+        saveSubmit.title = "Guardar"
     }
 }
