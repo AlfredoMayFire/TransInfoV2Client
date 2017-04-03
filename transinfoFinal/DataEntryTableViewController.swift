@@ -54,7 +54,16 @@ class DataEntryTableViewController: UITableViewController{
         "transportedBy": "",
         "name" :"",
         ]
-
+    var dictionaryA: [String:String] = [
+        "numDeTablilla" :"",
+        "marca" :"",
+        "modelo" :"",
+        "year": "",
+        "name" :"",
+        "categoriaPersona" :"",
+        "tipoPersona" :"",
+        "genero": "",
+        ]
 
     var objectNum = -1
     
@@ -242,14 +251,114 @@ class DataEntryTableViewController: UITableViewController{
         let indexPath = tableView.indexPathForSelectedRow // index path of selected cell
         
         let cellIndex = indexPath!.row // index of selected cell
-        // print(indexPath?.row)//iT'S THE NUMBER YOU WANT - 1
+        print(indexPath?.row)//iT'S THE NUMBER YOU WANT - 1
         let cellName = tableView.cellForRowAtIndexPath(indexPath!) //  instance of selected cell
-        
         
         objectNum = cellIndex + 1
         
-        performSegueWithIdentifier("extendedVehicle", sender: self)
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        //let newData = NSEntityDescription.insertNewObjectForEntityForName("PageFour", inManagedObjectContext: context)
+        let request1 = NSFetchRequest(entityName: "PageFour")
+        
+        request1.returnsObjectsAsFaults = false
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print("There was a problem!")
+            
+        }
+        
+        
+        do {
+            let results1 = try context.executeFetchRequest(request1)
+            
+            
+            
+            if results1.count > 0 {
+                
+                for result in results1 as! [NSManagedObject] {
+                    //print(result.objectID)
+                    if cellName?.textLabel?.text == result.valueForKey("numDeTablilla") as? String{
+                        dictionaryA["numDeTablilla"] = result.valueForKey("numDeTablilla") as? String
+                        dictionaryA["marca"] = result.valueForKey("marcaField") as? String
+                        dictionaryA["modelo"] = result.valueForKey("modeloField") as? String
+                        dictionaryA["year"] = result.valueForKey("yearField") as? String
+                        
+                    }
+                    
+                }
+                
+            }
+        } catch {
+            
+            print("Fetch Failed")
+        }
+        
+        let requestPeople = NSFetchRequest(entityName: "PageThree")
+        requestPeople.returnsObjectsAsFaults = false
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print("There was a problem!")
+            
+        }
+        
+        
+        
+        
+        do {
+            let results2 = try context.executeFetchRequest(requestPeople)
+            
+            if results2.count > 0 {
+                
+                for result in results2 as! [NSManagedObject] {
+                    
+                    if cellName?.textLabel?.text == result.valueForKey("name") as? String{
+                        dictionaryA["name"] = result.valueForKey("name") as? String
+                        dictionaryA["categoriaPersona"] = result.valueForKey("categoriaPerson") as? String
+                        dictionaryA["tipoPersona"] = result.valueForKey("tipoPersona") as? String
+                        dictionaryA["genero"] = result.valueForKey("genero") as? String
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        } catch {
+            
+            print("Fetch Failed")
+        }
+
+
+        if indexPath?.section == 0{
+            performSegueWithIdentifier("EditVehicleSegue", sender: self)
+        }
+        else{
+            performSegueWithIdentifier("EditPersonSegue", sender: self)
+        }
+
+        
+        //        let indexPath = tableView.indexPathForSelectedRow // index path of selected cell
+//        
+//        let cellIndex = indexPath!.row // index of selected cell
+//        // print(indexPath?.row)//iT'S THE NUMBER YOU WANT - 1
+//        let cellName = tableView.cellForRowAtIndexPath(indexPath!) //  instance of selected cell
+//        
+//        
+//        objectNum = cellIndex + 1
+//        
+//        performSegueWithIdentifier("extendedVehicle", sender: self)
+//        
 //        if indexPath?.section == 0{
 //            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 //            
@@ -380,6 +489,18 @@ class DataEntryTableViewController: UITableViewController{
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "EditVehicleSegue"){
+            //prepare for segue to the details view controller
+            
+            if let detailsVC = segue.destinationViewController as? VehicleExtendedViewController {
+                // let indexPath = self.tableView.indexPathForSelectedRow
+                
+                detailsVC.dictionary = self.dictionaryA
+                detailsVC.objectNum = self.objectNum
+            }
+            
+        }
+
         if (segue.identifier == "EditVehicle"){
             //prepare for segue to the details view controller
             
@@ -399,6 +520,15 @@ class DataEntryTableViewController: UITableViewController{
                 detailsVC.dictionary1 = self.dictionary1
             }
         }
+        if(segue.identifier == "EditPersonSegue"){
+            if let detailsVC = segue.destinationViewController as? PersonExtendedViewController {
+                //detailsVC.dictionary = self.dictionary
+                print(dictionaryA["name"])
+                //detailsVC.objectNum = self.objectNum
+                detailsVC.dictionaryA = self.dictionaryA
+            }
+        }
+
         self.tableView.reloadData()
         
         

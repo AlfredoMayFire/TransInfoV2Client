@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -426,19 +425,11 @@
                         <barButtonItem key="leftBarButtonItem" image="Sidebar 2" id="3J8-ih-ppc">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Guardar" style="done" id="t10-ge-PvI">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="Guardar:" destination="jnn-Si-A5y" id="2lU-4M-P2S"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Submit" id="mZX-QB-xJI">
-                                <connections>
-                                    <action selector="Guardar:" destination="jnn-Si-A5y" id="l7A-0b-naG"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="mZX-QB-xJI">
+                            <connections>
+                                <action selector="Guardar:" destination="jnn-Si-A5y" id="l7A-0b-naG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
@@ -807,19 +798,11 @@
                         <barButtonItem key="leftBarButtonItem" image="Sidebar 2" id="kyx-tQ-wv4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Guardar" style="done" id="Ffo-wf-aJg">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="saveData:" destination="KfN-BF-Lgo" id="5si-bz-cXP"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Submit" id="bx7-Oi-v2W">
-                                <connections>
-                                    <action selector="ReportFirst:" destination="KfN-BF-Lgo" id="oFV-vi-gZK"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="bx7-Oi-v2W">
+                            <connections>
+                                <action selector="ReportFirst:" destination="KfN-BF-Lgo" id="oFV-vi-gZK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -951,6 +934,8 @@
                         <segue destination="y6B-ak-hjx" kind="push" identifier="EditVehicle" id="9nv-1L-DMD"/>
                         <segue destination="4Dh-2u-Ip0" kind="push" identifier="EditPerson" id="cIx-FK-bHu"/>
                         <segue destination="IQc-yP-dGr" kind="push" identifier="extendedVehicle" id="Rdt-Ca-E81"/>
+                        <segue destination="2xh-g0-owt" kind="push" identifier="EditVehicleSegue" id="rRJ-lM-kEd"/>
+                        <segue destination="Flv-ZM-8CD" kind="push" identifier="EditPersonSegue" id="OSB-m3-WC8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVX-Q9-07F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1407,7 +1392,7 @@
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-vn-pVy">
                                         <rect key="frame" x="209" y="132" width="32" height="27"/>
-                                        <state key="normal" title="Button" image="Question Mark"/>
+                                        <state key="normal" title="Button" image="LookupIcon"/>
                                         <connections>
                                             <action selector="searchTablilla:" destination="y6B-ak-hjx" eventType="touchUpInside" id="UFK-pI-Wa8"/>
                                         </connections>
@@ -2312,19 +2297,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="INFORMACIÓN EXTENDIDA DE VEHÍCULO" id="Cgb-ag-xxR">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Guardar" style="done" id="ve8-R3-fk9">
-                                <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="C0M-Vc-Czz" kind="unwind" identifier="unWindSegueVehicle" unwindAction="unwindToVC:" id="1GY-Oa-ze0"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Submit" id="xbf-XV-B6z">
-                                <connections>
-                                    <action selector="guardarCondicionAccident:" destination="2xh-g0-owt" id="LWh-7D-Vfv"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="xbf-XV-B6z">
+                            <connections>
+                                <action selector="guardarCondicionAccident:" destination="2xh-g0-owt" id="LWh-7D-Vfv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -2381,7 +2358,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jf9-Mu-nzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="C0M-Vc-Czz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1408" y="1172"/>
         </scene>
@@ -3065,19 +3041,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="INFORMACIÓN EXTENDIDA DE LA PERSONA" id="0g5-Jv-509">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Guardar" style="done" id="cyd-FH-wRG">
-                                <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="AcV-Nn-Xo7" kind="unwind" identifier="unWindSeguePerson" unwindAction="unwindToVC2:" id="QV1-CY-xY2"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Submit" id="HO4-Ck-nWj">
-                                <connections>
-                                    <action selector="submit:" destination="Flv-ZM-8CD" id="npz-An-37c"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="HO4-Ck-nWj">
+                            <connections>
+                                <action selector="submit:" destination="Flv-ZM-8CD" id="npz-An-37c"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="1250" height="2500"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -3122,7 +3090,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Hg-5m-o70" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="AcV-Nn-Xo7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2456" y="2148"/>
         </scene>
@@ -3611,7 +3578,6 @@
         <image name="LookupIcon" width="22" height="21"/>
         <image name="Narrative Tab" width="25" height="25"/>
         <image name="Person Tab 1" width="25" height="25"/>
-        <image name="Question Mark" width="50" height="50"/>
         <image name="Sidebar 2" width="22" height="17"/>
         <image name="UPRM Seal" width="1024" height="1024"/>
         <image name="Vehicle Tab 5" width="25" height="25"/>
@@ -3624,12 +3590,13 @@
         <image name="road_closure-25" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rdt-Ca-E81"/>
         <segue reference="f2m-Wq-LpR"/>
         <segue reference="a90-V3-8ey"/>
         <segue reference="yRt-xF-PiY"/>
-        <segue reference="9nv-1L-DMD"/>
         <segue reference="cIx-FK-bHu"/>
-        <segue reference="OZL-AG-qyJ"/>
+        <segue reference="OSB-m3-WC8"/>
+        <segue reference="Rdt-Ca-E81"/>
+        <segue reference="9nv-1L-DMD"/>
+        <segue reference="rRJ-lM-kEd"/>
     </inferredMetricsTieBreakers>
 </document>

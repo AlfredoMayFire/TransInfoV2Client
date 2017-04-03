@@ -115,6 +115,20 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         "name" :"",
         ]
     
+    var dictionaryA: [String:String] = [
+        "numDeTablilla" :"",
+        "marca" :"",
+        "modelo" :"",
+        "year": "",
+        "name" :"",
+        "categoriaPersona" :"",
+        "tipoPersona" :"",
+        "genero": "",
+        ]
+    
+    
+    
+    
     
     var objectNum = Int()
     var isUpdating = false
@@ -182,10 +196,12 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         let webServicesObject = WebService.init()
         webServicesObject.initiate(4)
         
-        nameField.text = dictionary1["name"]
-        categoriaPersonField.text = dictionary1["categoriaPersona"]
-        typePersonField.text = dictionary1["tipoPersona"]
-        genderField.text = dictionary1["genero"]
+        print(dictionaryA["name"])
+        
+        nameField.text = dictionaryA["name"]
+        categoriaPersonField.text = dictionaryA["categoriaPersona"]
+        typePersonField.text = dictionaryA["tipoPersona"]
+        genderField.text = dictionaryA["genero"]
         
         rowField.isKeyboardHidden = true
         rowField.isDismissWhenSelected = true
@@ -328,10 +344,10 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         resultadoPruebaField.arrayList = webServicesObject.arrayOfDictionaries("drugTestResults")
         //
         
-        nameField.text = dictionary["name"]
-       categoriaPersonField.text = dictionary["categoriaPersona"]
-        typePersonField.text = dictionary["tipoPersona"]
-        genderField.text = dictionary["genero"]
+        //nameField.text = dictionary["name"]
+       //categoriaPersonField.text = dictionary["categoriaPersona"]
+        //typePersonField.text = dictionary["tipoPersona"]
+        //genderField.text = dictionary["genero"]
         rowField.text =  dictionary["row"]
         seatField.text = dictionary["seat"]
         otherLocationField.text = dictionary["otherLocation"]
@@ -420,8 +436,6 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //        
         listVehiculos.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
         listaInfracciones.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        nameField.text = dictionary["name"]
-        genderField.text = dictionary["genero"]
 
     }
     

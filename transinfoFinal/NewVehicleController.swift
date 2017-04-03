@@ -624,24 +624,31 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     }
     
     func foundVehicle(action: UIAlertAction){
-       // performSegueWithIdentifier("exitToDataEntry", sender: self)
-//        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
-//        
-//        // Creating a navigation controller with viewController at the root of the navigation stack.
-//        let navController = UINavigationController(rootViewController: viewController)
-//        self.presentViewController(navController, animated:true, completion: nil)
-//        
-//    }
-        
-        
-        
-//        let VC1 = self.storyboard!.instantiateViewControllerWithIdentifier("VehiclesTableViewController") as! VehiclesTableViewController
-//        self.navigationController!.pushViewController(VC1, animated: true)
-//    
+
         saveSubmit.title = "Submit"
+        
+        
+        //Utiliza Core para guardar global
+        
+        
+        
+        
     }
     
     func willNotUse(action: UIAlertAction){
         saveSubmit.title = "Guardar"
+        jurisdictionVehicleField.text = ""
+        numeroDeTablilla.text = ""
+        estadoField.text = ""
+        typeVehicleField.text = ""
+        VINField.text = ""
+        marcaField.text = ""
+        modeloField.text = ""
+        numeroDeMarbete.text = ""
+        aseguradoraField.text = ""
+        fechaCompraField.text = ""
+        fechaExpiracionField.text = ""
+        yearField.text = ""
+
     }
 }

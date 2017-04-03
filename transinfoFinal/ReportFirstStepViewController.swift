@@ -51,6 +51,8 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
     
     var objectNum = Int()
     
+    var crashID = Dictionary<String,AnyObject>()
+    
   //  let cellReuseIdentifier = "cell"
     //Dirección
     let manager = CLLocationManager()
@@ -121,9 +123,74 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         webServicesObjectPOST.addIData("LocationDescriptionES", value: locationField.text)
         webServicesObjectPOST.addIData("ZoneTypeDescriptionES", value: typeZonaField.text)
         print(webServicesObjectPOST.PostData["CrashType"])
-        webServicesObjectPOST.sendPOSTs(1)
-        print ("******************")
+        crashID = webServicesObjectPOST.sendPOSTs(1)
+        let myID = crashID["success"]
+        let results = myID as? Dictionary<String,AnyObject>
+        if results!["CrashId"] != nil {
+            print("Here it is!",results!["CrashId"])
+            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let context: NSManagedObjectContext = appDel.managedObjectContext
+            
+            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
+            
+            newData.setValue(results!["CrashId"], forKey: "crashBasicInformation")
+            
+            
+            
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            
+            
+            
+            let request = NSFetchRequest(entityName: "Posts")
+            
+            
+            
+            request.returnsObjectsAsFaults = false
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            
+            
+            do {
+                let results = try context.executeFetchRequest(request)
+                
+                
+                
+                if results.count > 0 {
+                    
+                    for result in results as! [NSManagedObject] {
+                        print("here is the crashid: ",result.valueForKey("crashBasicInformation"))
+                    }
+                    
+                }
+                
+            } catch {
+                
+                print("Fetch Failed")
+            }
+            
 
+        }
+    
+        
+        print ("******************")
+       
+        
     }
     
  

@@ -650,11 +650,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         print(numLicenciaSearch.text)
     
         if numLicenciaSearch.text == "" {
-//            let alertController = UIAlertController(title: "Invalido!", message:
-//                "El campo de busqueda esta vacio.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//            
-//            self.presentViewController(alertController, animated: true, completion: nil)
+
             myArray.append(dictionary1)
             myArray.removeAll()
         }
@@ -734,6 +730,17 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     func willNotUse(action: UIAlertAction){
         saveSubmit.title  = "guardar"
         //function to clear out fields
+        numLicenciaField.text = ""
+        generoField.text = ""
+        organDonor.text = ""
+        city.text = ""
+        state.text = ""
+        urbanizacionBarrio.text = ""
+        calle.text = ""
+        zipCode.text = ""
+        PhoneNumber.text = ""
+        nombreField.text = ""
+
     }
     @IBAction func unwindToPerson(segue: UIStoryboardSegue) {
     }

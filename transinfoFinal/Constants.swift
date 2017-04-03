@@ -142,6 +142,8 @@ extension WebService {
         static let InformationAllPerson = "/InformationAllPerson"
         static let CrashConditions = "/CrashConditions"
         static let CrashBasicInformation = "/CrashBasicInformation"
+        static let VehicleInformation = "/VehicleInformation"
+        static let AccidentCondition = "/AccidentCondition"
         
         // **Login
         static let login = "/login"
