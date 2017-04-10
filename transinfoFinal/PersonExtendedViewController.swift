@@ -164,9 +164,9 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //        }
         
 
-        
-        listaInfracciones.delegate = self
-        listaInfracciones.dataSource = self
+//        
+//        listaInfracciones.delegate = self
+//        listaInfracciones.dataSource = self
         
 //        listaInfracciones.registerClass(UITableViewCell.self,forCellReuseIdentifier: "Cell")
 //        listVehiculos.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
@@ -434,8 +434,8 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //        }
 //
 //        
-        listVehiculos.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
-        listaInfracciones.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+//        listVehiculos.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
+//        listaInfracciones.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
     }
     
@@ -789,7 +789,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //        } catch let error as NSError {
 //            print("Could not fetch \(error), \(error.userInfo)")
 //        }
-        listaInfracciones.reloadData()
+        //listaInfracciones.reloadData()
 
     }
     

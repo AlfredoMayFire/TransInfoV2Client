@@ -596,6 +596,8 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         
 
         }
+        
+        
     }
     
     @IBAction func Guardar(sender: AnyObject) {
@@ -728,7 +730,7 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     
     
     func willNotUse(action: UIAlertAction){
-        saveSubmit.title  = "guardar"
+        saveSubmit.title  = "Guardar"
         //function to clear out fields
         numLicenciaField.text = ""
         generoField.text = ""

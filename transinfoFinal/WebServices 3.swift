@@ -15,7 +15,9 @@ class WebService : NSObject{
      
     var PostData : Dictionary<String, String> = ["empty":"empty"]                                                                   //THE POST DICTIONARY
     
-//    
+    var emptyArray: Array<Dictionary<String, AnyObject>> = [["AccidenteFK":"0", "CrashConditionFK":"0"]]
+    
+//
 //    var resultMessage: AnyObject?
 //    var myArray = Array<AnyObject> ()
     
@@ -204,7 +206,10 @@ class WebService : NSObject{
                 print("Recalling same methods attempted")
             }
             break
-            
+//        case 7:
+//            if(!checkInitiation(calls-1)){
+//                self.addDatatoGetsData("AccidenteFK", item: emptyArray)
+//            }
             
         default:
             print("Invalid case: /(calls)")
@@ -458,7 +463,7 @@ class WebService : NSObject{
     func sendPOSTs(calls:Int) -> Dictionary<String,AnyObject> {
         
         var response = Dictionary<String,AnyObject>()
-        var error: [String:AnyObject] = ["error":"parameters missing"]
+        let error: [String:AnyObject] = ["error":"parameters missing"]
         
         switch calls{
         case 1:     //Informacion Basica Del Accidente
@@ -472,20 +477,14 @@ class WebService : NSObject{
             
         case 2:     //Condiciones Del Accidente
             if(readyToPOST(calls)){
-                WebService.post("\(url)\(WebService.Methods.CrashConditions)", parameters: PostData)
-                print(PostData)
-                print("HERE")
-                response = WebService.post("\(url)\(WebService.Methods.CrashBasicInformation)", parameters:PostData)
+               // WebService.post("\(url)\(WebService.Methods.CrashConditions)", parameters: PostData)
+//                print(PostData)
+//                print("HERE")
+                response = WebService.post("\(url)\(WebService.Methods.CrashConditions)", parameters:PostData)
+                print("Here's PostData:",PostData)
             }else{
                 print("\t\tCouldn't POST data, parameters misssing.")
                 response = error
-            }
-            if(readyToPOST(calls)){
-                WebService.post("\(url)\(WebService.Methods.CrashBasicInformation)", parameters: PostData)
-                print(PostData)
-                print("HERE Important Post")
-            }else{
-                print("\t\tCouldn't POST data, parameters misssing.")
             }
 
             break
@@ -547,6 +546,7 @@ class WebService : NSObject{
             break
         case 9:     // Table assign
             if(readyToPOST(calls)){
+                
                 response = WebService.post("\(url)\(WebService.Methods.AccidentCondition)", parameters: PostData)
 
             }else{

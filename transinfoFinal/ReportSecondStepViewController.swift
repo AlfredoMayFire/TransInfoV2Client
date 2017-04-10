@@ -41,11 +41,16 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var narrativeField: UITextView!
     
     var crashID = Dictionary<String,AnyObject>()
+    var values: [String:AnyObject] = [
+    "AccidenteFK":"",
+    "CrashConditionFK":"",
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //ws
         let webServicesObject = WebService.init()
+        
         webServicesObject.initiate(2)
         
         
@@ -186,6 +191,8 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
         
         let webServicesObjectPOST = WebService.init()
         
+//       
+//        
         webServicesObjectPOST.addIData("CollisionTypeDescriptionES", value: typeColisionField.text)
         
         webServicesObjectPOST.addIData("EventDescriptionES", value: eventField.text)
@@ -226,69 +233,19 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
         
         crashID = webServicesObjectPOST.sendPOSTs(2)
         
+        let webServicesObject2 = WebService.init()
+      
+        
         let myID = crashID["success"]
         let results = myID as? Dictionary<String,AnyObject>
         if results!["CrashId"] != nil {
-            print("Here it is!",results!["CrashId"])
-            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            let context: NSManagedObjectContext = appDel.managedObjectContext
-            
-            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
-            
-            newData.setValue(results!["CrashId"], forKey: "crashConditions")
-            
-            
-            
-            do {
-                
-                try context.save()
-                
-            } catch {
-                
-                print("There was a problem!")
-                
+            //print("Here it is!",results!["CrashId"])
+            values["CrashConditionFK"] = results!["CrashId"]?.stringValue
             }
+       // values["CrashConditionFK"] = "106"
             
             
             
-            let request = NSFetchRequest(entityName: "Posts")
-            
-            
-            
-            request.returnsObjectsAsFaults = false
-            do {
-                
-                try context.save()
-                
-            } catch {
-                
-                print("There was a problem!")
-                
-            }
-            
-            
-            do {
-                let results = try context.executeFetchRequest(request)
-                
-                
-                
-                if results.count > 0 {
-                    
-                    for result in results as! [NSManagedObject] {
-                        print("here is the crashid page two: ",result.valueForKey("crashConditions"))
-                    }
-                    
-                }
-                
-            } catch {
-                
-                print("Fetch Failed")
-            }
-            
-            
-        }
-
         
 //                    let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 //            
@@ -382,39 +339,94 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
 //
         
         
-        webServicesObjectPOST.addIData("AccidenteFK", value: trabajadoresPresentesField.text)
         
-        webServicesObjectPOST.addIData("CrashConditionFK", value: policiaPresenteField.text)
+        
+        //uncomment heredsfghgvjhbjnk
+        
+        
+        
+        
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        
+        let newData1 = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
+        
+        newData1.setValue(results!["CrashId"], forKey: "crashConditions")
+        
+        
+        
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print("There was a problem!")
+            
+        }
+        
+        
+        
+        let request11 = NSFetchRequest(entityName: "Posts")
+        
+        
+        
+        request11.returnsObjectsAsFaults = false
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print("There was a problem!")
+            
+        }
+        
+        
+        do {
+            let results = try context.executeFetchRequest(request11)
+            
+            
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+                    if result.valueForKey("crashBasicInformation") as? Int != 0 {
+                        print("here is the crashid for page1: ",result.valueForKey("crashBasicInformation"))
+                        values["AccidenteFK"] = result.valueForKey("crashBasicInformation")?.stringValue
+                    }
+                    
+                    }
+                }
+                
+            }catch {
+            
+            print("Fetch Failed")
+        }
+    
+    
+    
 
+
+        webServicesObject2.clearPostData()
+   
+        print("here's value 1:",values["AccidenteFK"] as! String )
+        print("here's value 2:",values["CrashConditionFK"] as! String)
+
+        webServicesObject2.addIData("AccidenteFK", value: values["AccidenteFK"] as! String)
+    
+        webServicesObject2.addIData("CrashConditionFK", value: values["CrashConditionFK"] as! String)
+
+  
+        
+        print(webServicesObject2.Data)
+        
+        crashID = webServicesObject2.sendPOSTs(9)
         
         
     }
-    
-    
-    
-    @IBAction func clear(sender: AnyObject) {
-        typeColisionField.text = ""
-        eventField.text = ""
-        eventLocationField.text = ""
-        mannerColisionField.text = ""
-        condition1Field.text = ""
-        condition2Field.text = ""
-        visibilidadConditionField.text = ""
-        pavimentCondition.text = ""
-        circunstanciaAmbientalField.text = ""
-        circunstanciaCarreteraField.text = ""
-        interseccionDesnivelField.text = ""
-        lugarEspecificoField.text = ""
-        tipoIntersecciónField.text = ""
-        RelacionadoOmnibusField.text = ""
-        relacionField.text = ""
-        localizacionAccidenteField.text = ""
-        typezonaField.text = ""
-        trabajadoresPresentesField.text = ""
-        policiaPresenteField.text = ""
-        
-    }
-    
-    
     
 }

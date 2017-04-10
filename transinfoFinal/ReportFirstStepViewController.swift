@@ -122,6 +122,7 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         webServicesObjectPOST.addIData("PropertyDescriptionES", value: propertyField.text)
         webServicesObjectPOST.addIData("LocationDescriptionES", value: locationField.text)
         webServicesObjectPOST.addIData("ZoneTypeDescriptionES", value: typeZonaField.text)
+        webServicesObjectPOST.addIData("Officer_fk", value: "2")//valor se captura del login
         print(webServicesObjectPOST.PostData["CrashType"])
         crashID = webServicesObjectPOST.sendPOSTs(1)
         let myID = crashID["success"]
@@ -138,15 +139,15 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
             
             
             
-            do {
-                
-                try context.save()
-                
-            } catch {
-                
-                print("There was a problem!")
-                
-            }
+//            do {
+//                
+//                try context.save()
+//                
+//            } catch {
+//                
+//                print("There was a problem!")
+//                
+//            }
             
             
             
@@ -307,8 +308,8 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
-
-        print("Here it is, ",objectNum)
+//
+//        print("Here it is, ",objectNum)
     }
     
     

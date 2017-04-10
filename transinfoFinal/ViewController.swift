@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class ViewController: UIViewController {
@@ -14,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var login: UIButton!
+    
+    var myAO: AnyObject?
+    var officerID = Dictionary<String,AnyObject>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,7 @@ class ViewController: UIViewController {
     @IBAction func login(sender: AnyObject) {
         print ("------------")
         
-        let  webServicesObjectPOST = WebService.init()
+        //let  webServicesObjectPOST = WebService.init()
         //            webServicesObjectPOST.addIData("username", value: userTextField.text)
         //            webServicesObjectPOST.addIData("password", value: passwordTextField.text)
         //            webServicesObjectPOST.sendPOSTs(8)
@@ -37,10 +41,13 @@ class ViewController: UIViewController {
         
         let url = "http://localhost:9000/login"
         var loginPostResults = WebService.post(url, parameters: ["username":userTextField.text!,"password":passwordTextField.text!] )
-        print ("que devuelves")
-        print(loginPostResults["error_code"])
+        //print("Here's this Thing",loginPostResults["payload"])
+        //print(loginPostResults["error_code"])
         //...................................
         
+        myAO = loginPostResults["payload"]
+        officerID = (myAO as? Dictionary<String,AnyObject>)!
+        print("Here's the OfficerID",officerID["OfficerID"])
         
         
         let error = loginPostResults["error_code"] as! String
@@ -49,10 +56,73 @@ class ViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        else{
+            //Capturar el valor del OfficerID
+            
+            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let context: NSManagedObjectContext = appDel.managedObjectContext
+            
+            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
+            
+            newData.setValue(officerID["OfficerID"], forKey: "officerID")
+            
+            
+            
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            
+            
+            
+            let request11 = NSFetchRequest(entityName: "Posts")
+            
+            
+            
+            request11.returnsObjectsAsFaults = false
+            
+            
+            //
+            //        do {
+            //            let results = try context.executeFetchRequest(request11)
+            //
+            //
+            //
+            //            if results.count > 0 {
+            //
+            //                for result in results as! [NSManagedObject] {
+            //
+            //                    if result.valueForKey("crashBasicInformation") as? Int != 0 {
+            //                        print("here is the crashid for page1: ",result.valueForKey("crashBasicInformation"))
+            //                        values["AccidenteFK"] = result.valueForKey("crashBasicInformation")?.stringValue
+            //                    }
+            //                    
+            //                }
+            //            }
+            //            
+            //        }catch {
+            //            
+            //            print("Fetch Failed")
+            //        }
+            //
+            
+            
+            
+            
+            
+            
+        }
+
+        }
         
         
-    }
-    
+        
     
 }
 
