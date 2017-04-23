@@ -136,40 +136,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
     //Actualizacion de webservice y diccionarios
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let request = NSFetchRequest(entityName: "PageThirteen")
-//        
-//        do {
-//            
-//            
-//            let results = try context.executeFetchRequest(request)
-//            //print(results.count)
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    
-//                    if let waySchool = result.valueForKey("waySchool") as? String {
-//                        
-//                    }
-//                    
-//                }
-//            }
-//        }catch{
-//            print("Error")
-//        }
-        
-
-//        
-//        listaInfracciones.delegate = self
-//        listaInfracciones.dataSource = self
-        
-//        listaInfracciones.registerClass(UITableViewCell.self,forCellReuseIdentifier: "Cell")
-//        listVehiculos.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+   
         let webServicesObject1 = WebService.init()
         webServicesObject1.initiate(3)
         
@@ -342,12 +309,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         resultadoPruebaField.isArrayWithObject = true
         resultadoPruebaField.keyPath = "DescriptionES"
         resultadoPruebaField.arrayList = webServicesObject.arrayOfDictionaries("drugTestResults")
-        //
-        
-        //nameField.text = dictionary["name"]
-       //categoriaPersonField.text = dictionary["categoriaPersona"]
-        //typePersonField.text = dictionary["tipoPersona"]
-        //genderField.text = dictionary["genero"]
+  
         rowField.text =  dictionary["row"]
         seatField.text = dictionary["seat"]
         otherLocationField.text = dictionary["otherLocation"]
@@ -369,74 +331,8 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         walkScholl.text = dictionary["waySchool"]
         localizacionMomentoAccident.text = dictionary["locationWhenCollision"]
         
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let request = NSFetchRequest(entityName: "PageTen")
-//        
-//        do {
-//            
-//            
-//            let results = try context.executeFetchRequest(request)
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    //1)
-//                    if let idHolder = objectNum as? Int{
-//                        if idHolder == result.valueForKey("objectNum") as? Int{
-//                            
-//                            print("is updating")
-//                            isUpdating = true
-//                        }
-//                    }
-//                    
-//                    //2)
-//                    
-//                }
-//            }
-//        }catch{
-//            print("Error")
-//        }
-//
-//        //, , , ""
-        scrollView.contentSize.height = 5000
-//        
-//        
-//        //tableLoads
-//        
-//        let requested = NSFetchRequest(entityName: "PageFour")
-//        
-//        //let departmentSort = NSSortDescriptor(key: "numDeTablilla", ascending: true)
-//        requested.sortDescriptors = []
-//        //let moc = dataController.managedObjectContext
-//        fetchedResultsController = NSFetchedResultsController(fetchRequest: requested, managedObjectContext: context,sectionNameKeyPath: "numDeTablilla", cacheName: "rootCache")
-//        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
-//        
-//        do {
-//            try fetchedResultsController.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
-//        
-//        let requestedI = NSFetchRequest(entityName: "PageTwelve")
-//        
-//        //let departmentSort = NSSortDescriptor(key: "numDeTablilla", ascending: true)
-//        requestedI.sortDescriptors = []
-//        //let moc = dataController.managedObjectContext
-//        fetchedResultsControllerI = NSFetchedResultsController(fetchRequest: requestedI, managedObjectContext: context,sectionNameKeyPath: "articleNumber", cacheName: "rootCache")
-//        fetchedResultsControllerI.delegate = self as? NSFetchedResultsControllerDelegate
-//        
-//        do {
-//            try fetchedResultsControllerI.performFetch()
-//        } catch {
-//            fatalError("Failed to initialize FetchedResultsController: \(error)")
-//        }
-//
-//        
-//        listVehiculos.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
-//        listaInfracciones.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
+        scrollView.contentSize.height = 5000
     }
     
     override func didReceiveMemoryWarning() {
@@ -463,183 +359,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         
         //seleccion multiple. every time table touched save object
-        // actionPriorToCrash.text
-        
-        //accionesMomentoAccident.text
-        
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        
-//        //HACE UPDATES AL CORE DATA SI YA EXISTE OBJETO CON ESE NUMERO, SI NO CREA NUEVO ASOCIADO A LA PERSONA
-//        if isUpdating{
-//            do {
-//                let request1 = NSFetchRequest(entityName: "PageTen")
-//                let results1 = try context.executeFetchRequest(request1)
-//                
-//                if results1.count > 0 {
-//                    
-//                    for result in results1 as! [NSManagedObject] {
-//                        if result.valueForKey("objectNum") as? Int == objectNum {
-//                            result.setValue(rowField.text,forKey: "row")
-//                            result.setValue(seatField.text,forKey: "seat")
-//                            result.setValue(otherLocationField.text,forKey: "otherLocation")
-//                            result.setValue(restraintSystemField.text,forKey:"restraintSystem")
-//                            result.setValue(airbagsActiviationField.text,forKey:"airbagActivation")
-//                            result.setValue(expulsionField.text,forKey:"expulsion")
-//                            result.setValue(extractionField.text,forKey:"extractionDescription")
-//                            result.setValue(relacionadoVelocidaField.text, forKey: "speedRelatedDescription")
-//                            result.setValue(conductorDistraidoBy.text,forKey: "distractedDriver")
-//                            result.setValue(equipoSeguridadUsado.text,forKey: "safetyEquipment")
-//
-//                        if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    
-//                    try context.save()
-//                    print("Vehicle Saved")
-//                    
-//                } catch {
-//                    
-//                    print("There was a problem!")
-//                    
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//            //entity two
-//            do {
-//                let request2 = NSFetchRequest(entityName: "PageEleven")
-//                
-//                let results2 = try context.executeFetchRequest(request2)
-//                
-//                if results2.count > 0 {
-//                    
-//                    for result in results2 as! [NSManagedObject] {
-//                        if result.valueForKey("objectNum") as? Int == objectNum {
-//                            
-//                            result.setValue(usoAlcoholField.text,forKey: "suspectAlcohol")
-//                            result.setValue(usoSustanciasControladas.text,forKey: "suspectSubst")
-//                            result.setValue(estadoPrueba.text,forKey: "testStatusAl")
-//                            result.setValue(tipoPrueba.text,forKey: "testTypeAl")
-//                            result.setValue(resultado.text,forKey: "testResultAl")
-//                            result.setValue(resultadoPruebaField.text, forKey:"testResultSubst")
-//                            result.setValue(estadoPruebaDosField.text, forKey: "testStatusSubst")
-//                            result.setValue(tipoPruebaDosField.text, forKey: "testTypeSubst")
-//
-//                            //falta uno?
-//                            
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    try context.save()
-//                } catch {
-//                    print("There was a problem!")
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//            //entity three
-//            do {
-//                let request3 = NSFetchRequest(entityName: "PageThirteen")
-//                
-//                
-//                let results3 = try context.executeFetchRequest(request3)
-//                if results3.count > 0 {
-//                    
-//                    for result in results3 as! [NSManagedObject] {
-//                        if result.valueForKey("objectNum") as? Int == objectNum {
-//                            
-//                           
-//                                                        result.setValue(walkScholl.text, forKey: "waySchool")
-//                            result.setValue(localizacionMomentoAccident.text, forKey: "locationWhenCollision")
-//            
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    try context.save()
-//                } catch {
-//                    print("There was a problem!")
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//        }
-//        else{
-//            let newData = NSEntityDescription.insertNewObjectForEntityForName("PageTen", inManagedObjectContext: context)
-//            
-//            print(objectNum)
-//            print(dictionary["testResultAl"])
-//            newData.setValue(rowField.text,forKey: "row")
-//            newData.setValue(seatField.text,forKey: "seat")
-//            newData.setValue(otherLocationField.text,forKey: "otherLocation")
-//            newData.setValue(restraintSystemField.text,forKey:"restraintSystem")
-//            newData.setValue(airbagsActiviationField.text,forKey:"airbagActivation")
-//            newData.setValue(expulsionField.text,forKey:"expulsion")
-//            newData.setValue(extractionField.text,forKey:"extractionDescription")
-//            newData.setValue(relacionadoVelocidaField.text, forKey: "speedRelatedDescription")//unsure
-//            newData.setValue(conductorDistraidoBy.text, forKey: "distractedDriver")
-//            newData.setValue(equipoSeguridadUsado.text, forKey: "safetyEquipment")//kind of unsure?
-//            newData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let secondNewData = NSEntityDescription.insertNewObjectForEntityForName("PageEleven", inManagedObjectContext: context)
-//            secondNewData.setValue(usoAlcoholField.text, forKey: "suspectAlcohol")//unsure
-//            secondNewData.setValue(usoSustanciasControladas.text, forKey: "suspectSubst")
-//            secondNewData.setValue(estadoPrueba.text, forKey: "testStatusAl")
-//            secondNewData.setValue(tipoPrueba.text, forKey: "testTypeAl")
-//            secondNewData.setValue(resultado.text, forKey: "testResultAl")//unsure if this one or other one
-//            secondNewData.setValue(resultadoPruebaField.text, forKey: "testResultSubst")
-//            secondNewData.setValue(estadoPruebaDosField.text, forKey: "testStatusSubst")
-//            secondNewData.setValue(tipoPruebaDosField.text, forKey: "testTypeSubst")
-//            secondNewData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let thirdNewData = NSEntityDescription.insertNewObjectForEntityForName("PageThirteen", inManagedObjectContext: context)
-//            
-//            thirdNewData.setValue(walkScholl.text, forKey: "waySchool")
-//            thirdNewData.setValue(localizacionMomentoAccident.text, forKey: "locationWhenCollision")
-//            thirdNewData.setValue(objectNum, forKey: "objectNum")
-//    
-//            do {
-//                
-//                try context.save()
-//                
-//            } catch {
-//                
-//                print("There was a problem!")
-//                
-//            }
-//        }
+ 
         print ("------------")
         
         //  print (typeAccident.text)
@@ -647,6 +367,10 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         let  webServicesObjectPOST = WebService.init()
         
         //InformationforVehicleOcuppants
+        
+        webServicesObjectPOST.addIData("CategoryPerson",value: categoriaPersonField.text)
+        
+        webServicesObjectPOST.addIData("TypePerson",value: typePersonField.text)
         
         webServicesObjectPOST.addIData("Row", value: rowField.text)
         
@@ -656,13 +380,13 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         webServicesObjectPOST.addIData("RestraintSystem", value: restraintSystemField.text)
         
-        webServicesObjectPOST.addIData("AirbagActivation", value: airbagsActiviationField.text)
+        webServicesObjectPOST.addIData("AirbagsActivation", value: airbagsActiviationField.text)
         
         webServicesObjectPOST.addIData("Expulsion", value: expulsionField.text)
         
-        webServicesObjectPOST.addIData("SpeedRelatedDescription", value: relacionadoVelocidaField.text)
+        webServicesObjectPOST.addIData("SpeedRelated", value: relacionadoVelocidaField.text)
         
-        webServicesObjectPOST.addIData("ExtractionDescription", value: extractionField.text)
+        webServicesObjectPOST.addIData("Extraction", value: extractionField.text)
         
         // Selection Driver Cirncusntance. ContribActionsCirncustanceS
         
@@ -678,11 +402,16 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         
         
-        webServicesObjectPOST.addIData("DistractedDriver", value: conductorDistraidoBy.text)
+        webServicesObjectPOST.addIData("DistractedDriverBy", value: conductorDistraidoBy.text)
         
-        webServicesObjectPOST.addIData("conditions", value: condicionMomentoAccidente.text)
         
-        webServicesObjectPOST.addIData("SafetyEquipment", value: equipoSeguridadUsado.text)
+        //faltan dos? chequiar keys caso 7 webservices
+        
+        
+        
+        webServicesObjectPOST.addIData("ConditionCollisionTime", value: condicionMomentoAccidente.text)
+        
+        webServicesObjectPOST.addIData("SafetyEquipmentUsed", value: equipoSeguridadUsado.text)
         
         //Existe un SafetyEquipment Selection, SafetyEquipmentIDFK, idPersonVehicleOccupantFK, idNewVehicleFK, idNewPersonFK
         
@@ -692,7 +421,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         //InformationAllPerson
         
-        webServicesObjectPOST.addIData("SuspectAlcohol", value: usoAlcoholField.text)
+        webServicesObjectPOST.addIData("SuspectAlcoholUse", value: usoAlcoholField.text)
         
         webServicesObjectPOST.addIData("TestStatusAl", value: estadoPrueba.text)
         
@@ -700,13 +429,16 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         webServicesObjectPOST.addIData("TestResultAl", value: resultado.text)
         
-        webServicesObjectPOST.addIData("SuspectSubst", value: usoSustanciasControladas.text)
         
-        webServicesObjectPOST.addIData("TestStatusSubst", value: estadoPruebaDosField.text)
+        //Falta   TestResultTP
         
-        webServicesObjectPOST.addIData("TestTypeSubst", value: tipoPruebaDosField.text)
+        webServicesObjectPOST.addIData("SuscpectControlledSubstances", value: usoSustanciasControladas.text)
         
-        webServicesObjectPOST.addIData("TestResultSubst", value: resultadoPruebaField.text)
+        webServicesObjectPOST.addIData("TestStatusSub", value: estadoPruebaDosField.text)
+        
+        webServicesObjectPOST.addIData("TestTypeSub", value: tipoPruebaDosField.text)
+        
+        webServicesObjectPOST.addIData("TestResultSub", value: resultadoPruebaField.text)
         
         //captura idLawInfractionFK, idNewVehicleFK, idNewPersonFK
         
@@ -726,7 +458,18 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         //webServicesObjectPOST.addIData("actionPrior", value: actionPriorToCrash.text)
         
-        webServicesObjectPOST.addIData("WaySchool", value: walkScholl.text)
+        webServicesObjectPOST.addIData("InWayToSchool", value: walkScholl.text)
+        
+        /*
+ 
+        Falta
+         ActionsBeforeCollision
+         ActionsAtCollisionTime
+        
+        
+ */
+        
+        
         
         //Selection Time. ActionCollisionTime
         
@@ -740,30 +483,44 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         
         //webServicesObjectPOST.addIData("accionesMomentoAccident.text", value: accionesMomentoAccident.text)
         
-        webServicesObjectPOST.addIData("locationWhenCollision", value: localizacionMomentoAccident.text)
+        webServicesObjectPOST.addIData("LocationWhenCollision", value: localizacionMomentoAccident.text)
         
         
         
         
-        let webServicesObjectPOST1 = WebService.init()
         
-        webServicesObjectPOST1.addIData("TransportedByMedicalEmergencies", value: personTransport.text)
         
-        webServicesObjectPOST1.addIData("TransportedTo", value: TransportedTo.text)
         
-        webServicesObjectPOST1.addIData("TransportedBy", value: transportedBy.text)
         
-        webServicesObjectPOST1.addIData("MedicalEmergenciesNumber", value: MedicalEmergenciesNumber.text)
         
-        webServicesObjectPOST1.addIData("AmbulanceCSPNumber", value: AmbulanceCSPNumber.text)
-        webServicesObjectPOST1.addIData("PersonaCategory", value: categoriaPersonField.text)
         
-        webServicesObjectPOST1.addIData("PersonaType", value: typePersonField.text)
         
-        webServicesObjectPOST1.sendPOSTs(5)
         
-        performSegueWithIdentifier("PersonReturnToTable", sender: self)
         
+        
+        
+        
+        webServicesObjectPOST.addIData("TransportedByME", value: personTransport.text)
+
+        webServicesObjectPOST.addIData("TransportedTo", value: TransportedTo.text)
+        
+        webServicesObjectPOST.addIData("TransportedBy", value: transportedBy.text)
+        
+        webServicesObjectPOST.addIData("MedicalEmergenciesNumber", value: MedicalEmergenciesNumber.text)
+        
+        webServicesObjectPOST.addIData("AmbulanceCSPNumber", value: AmbulanceCSPNumber.text)
+        
+        //Temporary values for missing keys
+        webServicesObjectPOST.addIData("PersonaFK", value: "TempValue0")
+        webServicesObjectPOST.addIData("TestResultTP", value: "TempValue1")
+        webServicesObjectPOST.addIData("ActionsAtCollisionTime", value: "TempValue2")
+        webServicesObjectPOST.addIData("LocationWhenCollision", value: "TempValue3")
+        webServicesObjectPOST.addIData("DriverCirncunstanceBC", value: "TempValue4")
+        webServicesObjectPOST.addIData("DistractedBy", value: "TempValue5")
+        webServicesObjectPOST.addIData("ActionsBeforeCollision", value: "TempValue6")
+        print(webServicesObjectPOST.PostData)
+
+        webServicesObjectPOST.sendPOSTs(7)
     }
 
     
@@ -771,160 +528,14 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //1
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        
-//        //2
-//        
-//        
-//        let fetchRequest = NSFetchRequest(entityName: "PageTwelve")
-//        
-//        //3
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            infracciones = results as! [NSManagedObject]
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-        //listaInfracciones.reloadData()
-
-    }
+        }
     
-//    override func viewDidAppear(animated: Bool) {
-//        //1
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        
-//        //2
-//        
-//        
-//        let fetchRequest = NSFetchRequest(entityName: "PageTwelve")
-//        
-//        //3
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            object = results as! [NSManagedObject]
-//        } catch let error as NSError {
-//            print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//        listaInfracciones.reloadData()
-//   
-//    }
     
     @IBAction func unwindToPersonExtended(segue: UIStoryboardSegue) {
     }
 
     @IBAction func submit(sender: AnyObject) {
-        print ("------------")
-        
-        //  print (typeAccident.text)
-        
-        let  webServicesObjectPOST = WebService.init()
-        
-        //InformationforVehicleOcuppants
-        
-        webServicesObjectPOST.addIData("Row", value: rowField.text)
-        
-        webServicesObjectPOST.addIData("Seat", value: seatField.text)
-        
-        webServicesObjectPOST.addIData("OtherLocation", value: otherLocationField.text)
-        
-        webServicesObjectPOST.addIData("RestraintSystem", value: restraintSystemField.text)
-        
-        webServicesObjectPOST.addIData("AirbagActivation", value: airbagsActiviationField.text)
-        
-        webServicesObjectPOST.addIData("Expulsion", value: expulsionField.text)
-        
-        webServicesObjectPOST.addIData("SpeedRelatedDescription", value: relacionadoVelocidaField.text)
-        
-        webServicesObjectPOST.addIData("ExtractionDescription", value: extractionField.text)
-        
-        // Selection Driver Cirncusntance. ContribActionsCirncustanceS
-        
-        // ContribActionsCirmstanceFK
-        
-        //IdPersonInformationVehicleOccupantFK
-        
-        //idNewPersonFK
-        
-        //idNewVehicleFK
-        
-        //webServicesObjectPOST.addIData("contribActionsCircumstances", value: circunstanciasConductorField.text)
-        
-        
-        
-        webServicesObjectPOST.addIData("DistractedDriver", value: conductorDistraidoBy.text)
-        
-        webServicesObjectPOST.addIData("conditions", value: condicionMomentoAccidente.text)
-        
-        webServicesObjectPOST.addIData("SafetyEquipment", value: equipoSeguridadUsado.text)
-        
-        //Existe un SafetyEquipment Selection, SafetyEquipmentIDFK, idPersonVehicleOccupantFK, idNewVehicleFK, idNewPersonFK
-        
-        //Captura idNewPersonFK
-        
-        //Captura idNewVehicleFK
-        
-        //InformationAllPerson
-        
-        webServicesObjectPOST.addIData("SuspectAlcohol", value: usoAlcoholField.text)
-        
-        webServicesObjectPOST.addIData("TestStatusAl", value: estadoPrueba.text)
-        
-        webServicesObjectPOST.addIData("TestTypeAl", value: tipoPrueba.text)
-        
-        webServicesObjectPOST.addIData("TestResultAl", value: resultado.text)
-        
-        webServicesObjectPOST.addIData("SuspectSubst", value: usoSustanciasControladas.text)
-        
-        webServicesObjectPOST.addIData("TestStatusSubst", value: estadoPruebaDosField.text)
-        
-        webServicesObjectPOST.addIData("TestTypeSubst", value: tipoPruebaDosField.text)
-        
-        webServicesObjectPOST.addIData("TestResultSubst", value: resultadoPruebaField.text)
-        
-        //captura idLawInfractionFK, idNewVehicleFK, idNewPersonFK
-        
-        
-        
-        //INFORMATION PCV
-        
-        //Selection Action Prior to Crash. ActionTimeSelection
-        
-        // actionPriorToCrashIDFK
-        
-        //idInformationPCVFK
-        
-        //idNewVehicleFK
-        
-        //idNewPersonFK
-        
-        //webServicesObjectPOST.addIData("actionPrior", value: actionPriorToCrash.text)
-        
-        webServicesObjectPOST.addIData("WaySchool", value: walkScholl.text)
-        
-        //Selection Time. ActionCollisionTime
-        
-        //contribActionsCircumstanceIDFK
-        
-        //idInformationPCFK
-        
-        //idNewVehicleFK
-        
-        //idNewPersonFK
-        
-        //webServicesObjectPOST.addIData("accionesMomentoAccident.text", value: accionesMomentoAccident.text)
-        
-        webServicesObjectPOST.addIData("locationWhenCollision", value: localizacionMomentoAccident.text)
-        
-        //captura idNewVehiclesFK, idNewPersonFK
-        
-        webServicesObjectPOST.sendPOSTs(7)
-    }
+           }
     
     //TABLE LOADING
     

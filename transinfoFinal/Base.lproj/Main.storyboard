@@ -891,7 +891,7 @@
                                 <rect key="frame" x="0.0" y="92" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rqC-jT-tUZ" id="sFM-Dg-yVD">
-                                    <rect key="frame" x="0.0" y="0.0" width="682" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="682" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -899,7 +899,7 @@
                                 <rect key="frame" x="0.0" y="136" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rfQ-JW-Hr6" id="jUp-wT-9ZG">
-                                    <rect key="frame" x="0.0" y="0.0" width="682" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="682" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1384,7 +1384,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iW2-Tq-AHg" id="Bbw-FA-ysW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -1481,7 +1481,7 @@
                                         <rect key="frame" x="0.0" y="64" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="usQ-uq-P2L" id="WPd-e6-HlF">
-                                            <rect key="frame" x="0.0" y="0.0" width="682" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="682" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1. Persona" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIY-fh-9RF">
@@ -1501,7 +1501,7 @@
                                         <rect key="frame" x="0.0" y="108" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nh9-dD-ttz" id="KEa-K4-ATC">
-                                            <rect key="frame" x="0.0" y="0.0" width="682" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="682" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2. Vehículo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTz-HD-iAh">
@@ -2421,7 +2421,7 @@
                                 <rect key="frame" x="0.0" y="92" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CUF-iw-KyD" id="pJN-SR-OeW">
-                                    <rect key="frame" x="0.0" y="0.0" width="682" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="682" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-dQ-wBh">
@@ -3013,6 +3013,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="HO4-Ck-nWj">
                             <connections>
                                 <action selector="submit:" destination="Flv-ZM-8CD" id="npz-An-37c"/>
+                                <segue destination="Kkr-QU-B4Q" kind="unwind" unwindAction="unwindToVC2:" id="JhN-j1-UWL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3040,6 +3041,7 @@
                         <outlet property="localizacionMomentoAccident" destination="C6o-pe-k1u" id="oBN-Az-afK"/>
                         <outlet property="nameField" destination="Vez-m4-yBD" id="v16-VY-dBl"/>
                         <outlet property="otherLocationField" destination="Pjo-mB-Eey" id="lmp-5q-PD5"/>
+                        <outlet property="personTransport" destination="LdI-fW-nLj" id="MeP-qI-sQV"/>
                         <outlet property="relacionadoVelocidaField" destination="d6j-pM-pe5" id="mlD-dX-y4P"/>
                         <outlet property="restraintSystemField" destination="BU2-eI-Nrk" id="AwP-LP-XIU"/>
                         <outlet property="resultado" destination="iZc-LT-Kfn" id="lcS-aq-Oly"/>
@@ -3058,6 +3060,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Hg-5m-o70" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Kkr-QU-B4Q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2206" y="2144"/>
         </scene>
@@ -3341,7 +3344,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ucE-gk-eca" id="w6T-wO-6Xa">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3488,7 +3491,7 @@
                                 <rect key="frame" x="0.0" y="28" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WnT-xk-uv2" id="nt4-IX-rgJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -3558,13 +3561,13 @@
         <image name="road_closure-25" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f2m-Wq-LpR"/>
         <segue reference="a90-V3-8ey"/>
+        <segue reference="f2m-Wq-LpR"/>
         <segue reference="yRt-xF-PiY"/>
-        <segue reference="cIx-FK-bHu"/>
-        <segue reference="OSB-m3-WC8"/>
-        <segue reference="Rdt-Ca-E81"/>
         <segue reference="9nv-1L-DMD"/>
+        <segue reference="Rdt-Ca-E81"/>
         <segue reference="rRJ-lM-kEd"/>
+        <segue reference="cIx-FK-bHu"/>
+        <segue reference="emB-ob-KHv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -499,16 +499,19 @@ class WebService : NSObject{
             
         case 4:     // NewVehicle (Multiple)
             if(readyToPOST(calls)){
-                WebService.post("\(url)\(WebService.Methods.NewVehicle)", parameters: PostData)
+                 response = WebService.post("\(url)\(WebService.Methods.NewVehicle)", parameters: PostData)
             }else{
+                response = error
                 print("\t\tCouldn't POST data, parameters misssing")
             }
             break
             
         case 5:     // NewPerson  (Multiple)
             if(readyToPOST(calls)){
-                WebService.post("\(url)\(WebService.Methods.NewPerson)", parameters: PostData)
+                print("Here's PostData:",PostData)
+                response = WebService.post("\(url)\(WebService.Methods.NewPerson)", parameters: PostData)
             }else{
+                response = error
                 print("\t\tCouldn't POST data, parameters misssing")
             }
             break
@@ -528,12 +531,14 @@ class WebService : NSObject{
             
         case 7:     // Person Extended (Multiple)
             if(readyToPOST(calls)){
-                WebService.post("\(url)\(WebService.Methods.InformationVehicleOccupant)", parameters: PostData)
-                WebService.post("\(url)\(WebService.Methods.safetyEquipmentSelection)", parameters: PostData)  //
-                WebService.post("\(url)\(WebService.Methods.InformationAllPerson)", parameters: PostData)
-                WebService.post("\(url)\(WebService.Methods.LawInfraction)", parameters: PostData)
+                 response = WebService.post("\(url)\(WebService.Methods.PersonExtendInformation)", parameters: PostData)
+//                WebService.post("\(url)\(WebService.Methods.InformationVehicleOccupant)", parameters: PostData)
+//                WebService.post("\(url)\(WebService.Methods.safetyEquipmentSelection)", parameters: PostData)
+//                WebService.post("\(url)\(WebService.Methods.InformationAllPerson)", parameters: PostData)
+                //WebService.post("\(url)\(WebService.Methods.LawInfraction)", parameters: PostData)
             }else{
                 print("\t\tCouldn't POST data, parameters misssing")
+                response = error
             }
             break
             
@@ -633,7 +638,7 @@ class WebService : NSObject{
             
         case 4:     //New Vehicle
             if(!((PostData["VehicleType"]?.isEmpty)==nil
-                || (PostData["Occupants"]?.isEmpty)==nil
+                //|| (PostData["Occupants"]?.isEmpty)==nil
                 || (PostData["PlateNumber"]?.isEmpty)==nil
                 || (PostData["VehicleJurisdiction"]?.isEmpty)==nil
                 || (PostData["State"]?.isEmpty)==nil
@@ -651,9 +656,7 @@ class WebService : NSObject{
             }
             
         case 5:     //New Person
-            if(!((PostData["PersonaCategory"]?.isEmpty)==nil
-                || (PostData["PersonaType"]?.isEmpty)==nil
-                || (PostData["Name"]?.isEmpty)==nil
+            if(!((PostData["Name"]?.isEmpty)==nil
                 || (PostData["Gender"]?.isEmpty)==nil
                 || (PostData["LicenseType"]?.isEmpty)==nil
                 || (PostData["LicenceNumber"]?.isEmpty)==nil
@@ -664,13 +667,7 @@ class WebService : NSObject{
                 || (PostData["City"]?.isEmpty)==nil
                 || (PostData["StateCountry"]?.isEmpty)==nil
                 || (PostData["ZipCode"]?.isEmpty)==nil
-                || (PostData["PhoneNumber"]?.isEmpty)==nil
-                || (PostData["TransportedByMedicalEmergencies"]?.isEmpty)==nil
-                || (PostData["TransportedTo"]?.isEmpty)==nil
-                || (PostData["TransportedBy"]?.isEmpty)==nil
-                || (PostData["MedicalEmergenciesNumber"]?.isEmpty)==nil
-                || (PostData["AmbulanceCSPNumber"]?.isEmpty)==nil
-                || (PostData["idNewVehicle"]?.isEmpty)==nil)){
+                || (PostData["PhoneNumber"]?.isEmpty)==nil)){
                 return true
             }else{
                 return false
@@ -730,44 +727,41 @@ class WebService : NSObject{
                 return false
             }
             
-        case 7:     //Information Person Extend-InformationVehicleOccupant
-            if(!((PostData["Row"]?.isEmpty)==nil
+        case 7:     //Information Person Extend - Keys de PersonExtendInformationModel in Webservices Java project
+            if(!((PostData["PersonaFK"]?.isEmpty)==nil
+                || (PostData["CategoryPerson"]?.isEmpty)==nil
+                || (PostData["TypePerson"]?.isEmpty)==nil
+                || (PostData["Row"]?.isEmpty)==nil
                 || (PostData["Seat"]?.isEmpty)==nil
                 || (PostData["OtherLocation"]?.isEmpty)==nil
                 || (PostData["RestraintSystem"]?.isEmpty)==nil
-                || (PostData["AirbagActivation"]?.isEmpty)==nil
+                || (PostData["AirbagsActivation"]?.isEmpty)==nil
                 || (PostData["Expulsion"]?.isEmpty)==nil
-                || (PostData["SpeedRelatedDescription"]?.isEmpty)==nil
-                || (PostData["ExtractionDescription"]?.isEmpty)==nil
-                || (PostData["DistractedDriver"]?.isEmpty)==nil
-                || (PostData["SafetyEquipment"]?.isEmpty)==nil
-                || (PostData["idNewPersonFK"]?.isEmpty)==nil
-                || (PostData["idNewVehicleFK"]?.isEmpty)==nil
-                //safetyEquipmentSelection
-                || (PostData["SafetyEquipmentIDFK"]?.isEmpty)==nil
-                || (PostData["idPersonVehicleOccupantFK"]?.isEmpty)==nil
-                || (PostData["idNewVehicleFK"]?.isEmpty)==nil
-                || (PostData["idNewPersonFK"]?.isEmpty)==nil
-                //InformationAllPerson
-                || (PostData["SuspectAlcohol"]?.isEmpty)==nil
+                || (PostData["SpeedRelated"]?.isEmpty)==nil
+                || (PostData["Extraction"]?.isEmpty)==nil
+                || (PostData["DriverCirncunstanceBC"]?.isEmpty)==nil
+                || (PostData["DistractedDriverBy"]?.isEmpty)==nil
+                || (PostData["DistractedBy"]?.isEmpty)==nil
+                || (PostData["ConditionCollisionTime"]?.isEmpty)==nil
+                || (PostData["SafetyEquipmentUsed"]?.isEmpty)==nil
+                || (PostData["SuspectAlcoholUse"]?.isEmpty)==nil
                 || (PostData["TestStatusAl"]?.isEmpty)==nil
                 || (PostData["TestTypeAl"]?.isEmpty)==nil
                 || (PostData["TestResultAl"]?.isEmpty)==nil
-                || (PostData["SuspectSubst"]?.isEmpty)==nil
-                || (PostData["TestStatusSubst"]?.isEmpty)==nil
-                || (PostData["TestTypeSubst"]?.isEmpty)==nil
-                || (PostData["TestResultSubst"]?.isEmpty)==nil
-                || (PostData["idLawInfractionFK"]?.isEmpty)==nil
-                || (PostData["idNewVehicleFK"]?.isEmpty)==nil
-                || (PostData["idNewPersonFK"]?.isEmpty)==nil
-                //LawInfraction
-                || (PostData["FineNumber"]?.isEmpty)==nil
-                || (PostData["ArticleNumber"]?.isEmpty)==nil
-                || (PostData["SummonsToCourt"]?.isEmpty)==nil
-                || (PostData["Hora"]?.isEmpty)==nil
-                || (PostData["idNewVehicleFK"]?.isEmpty)==nil
-                || (PostData["idNewPersonFK"]?.isEmpty)==nil
-                || (PostData["Hora"]?.isEmpty)==nil)){
+                || (PostData["TestResultTP"]?.isEmpty)==nil
+                || (PostData["SuscpectControlledSubstances"]?.isEmpty)==nil
+                || (PostData["TestStatusSub"]?.isEmpty)==nil
+                || (PostData["TestTypeSub"]?.isEmpty)==nil
+                || (PostData["TestResultSub"]?.isEmpty)==nil
+                || (PostData["ActionsBeforeCollision"]?.isEmpty)==nil
+                || (PostData["InWayToSchool"]?.isEmpty)==nil
+                || (PostData["ActionsAtCollisionTime"]?.isEmpty)==nil
+                || (PostData["LocationWhenCollision"]?.isEmpty)==nil
+                || (PostData["TransportedByME"]?.isEmpty)==nil
+                || (PostData["TransportedTo"]?.isEmpty)==nil
+                || (PostData["TransportedBy"]?.isEmpty)==nil
+                || (PostData["MedicalEmergenciesNumber"]?.isEmpty)==nil
+                || (PostData["AmbulanceCSPNumber"]?.isEmpty)==nil)){
                 return true
             }else{
                 return false

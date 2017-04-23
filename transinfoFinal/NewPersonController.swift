@@ -64,6 +64,8 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
     var dictionaries: Dictionary<String,AnyObject> = ["vacio":"empty"]
     var myArray = Array<AnyObject> ()
     
+    var newPersonID = Dictionary<String,AnyObject>()
+    
     
     //FALTAN PAR DE VALORES
     var dictionary1: [String:String] = [
@@ -596,11 +598,6 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         
 
         }
-        
-        
-    }
-    
-    @IBAction func Guardar(sender: AnyObject) {
         print("--------------------")
         let webServicesObjectPOST = WebService.init()
         
@@ -633,12 +630,66 @@ class NewPersonController: UIViewController/*, PPScanningDelegate*/{
         webServicesObjectPOST.addIData("PhoneNumber", value: PhoneNumber.text)
         
         
+        newPersonID = webServicesObjectPOST.sendPOSTs(5)
         
-        //Captura el Valor del id de vehiculo.....idNewVehicle
+        let myID = newPersonID["success"]
+        let results = myID as? Dictionary<String,AnyObject>
+        if results!["NewPersonId"] != nil{
+            print(results!["NewPersonId"])
+            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let context: NSManagedObjectContext = appDel.managedObjectContext
+            
+            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
+            
+            newData.setValue(results!["NewPersonId"], forKey: "newPersonID")
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            let request = NSFetchRequest(entityName: "Posts")
+            
+            
+            
+            request.returnsObjectsAsFaults = false
+
+            do {
+                let results = try context.executeFetchRequest(request)
+                
+                
+                
+                if results.count > 0 {
+                    
+                    for result in results as! [NSManagedObject] {
+                        if result.valueForKey("newPersonID") as? Int == 0 {
+                           // result.delete("newPersonID")
+                            context.deleteObject(result)
+                        }
+                        else{
+                            print("here is the newpersonid: ",result.valueForKey("newPersonID"))
+                        }
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                print("Fetch Failed")
+            }
+
+
+        }
+
         
-        webServicesObjectPOST.sendPOSTs(5)
-        
-        
+    }
+    
+    @IBAction func Guardar(sender: AnyObject) {
         
     }
 

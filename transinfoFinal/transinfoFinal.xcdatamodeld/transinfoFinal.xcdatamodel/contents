@@ -187,6 +187,8 @@
     <entity name="Posts" syncable="YES">
         <attribute name="crashBasicInformation" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="crashConditions" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="newPersonID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="newVehicleID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="officerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
@@ -203,6 +205,6 @@
         <element name="PageThree" positionX="-38" positionY="-72" width="128" height="193"/>
         <element name="PageTwelve" positionX="-866" positionY="378" width="128" height="165"/>
         <element name="PageTwo" positionX="-243" positionY="-9" width="128" height="345"/>
-        <element name="Posts" positionX="-657" positionY="81" width="128" height="90"/>
+        <element name="Posts" positionX="-657" positionY="81" width="128" height="120"/>
     </elements>
 </model>

@@ -60,6 +60,9 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     var objectNum = Int()
     var isUpdating = false
 
+    
+    var newVehicleID = Dictionary<String,AnyObject>()
+    
     var myArray = Array<AnyObject> ()
     
     @IBAction func fechaCompraField(sender: UITextField) {
@@ -442,20 +445,16 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             isUpdating = false
            // }
         }
-    
-
-    }
-    
-    @IBAction func submit(sender: AnyObject) {
         
+        //post time
         
         print("--------------------")
-   
+        
         let webServicesObjectPOST = WebService.init()
         
         webServicesObjectPOST.addIData("VehicleType", value: typeVehicleField.text)
         
-        webServicesObjectPOST.addIData("Occupants", value: ocupantesField.text)
+//        webServicesObjectPOST.addIData("Occupants", value: ocupantesField.text)
         
         webServicesObjectPOST.addIData("PlateNumber", value: numeroDeTablilla.text)
         
@@ -478,8 +477,68 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         webServicesObjectPOST.addIData("PurchaseDate", value: fechaCompraField.text)
         
         webServicesObjectPOST.addIData("ExpirationDate", value: fechaExpiracionField.text)
+        print(webServicesObjectPOST.PostData)
         
-        webServicesObjectPOST.sendPOSTs(4)
+        newVehicleID = webServicesObjectPOST.sendPOSTs(4)
+
+        
+        let myID = newVehicleID["success"]
+        let results = myID as? Dictionary<String,AnyObject>
+        if results!["NewVehicleId"] != nil{
+            print(results!["NewVehicleId"])
+            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let context: NSManagedObjectContext = appDel.managedObjectContext
+            
+            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
+            
+            newData.setValue(results!["NewVehicleId"], forKey: "newVehicleID")
+            do {
+                
+                try context.save()
+                
+            } catch {
+                
+                print("There was a problem!")
+                
+            }
+            let request = NSFetchRequest(entityName: "Posts")
+            
+            
+            
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try context.executeFetchRequest(request)
+                
+                
+                
+                if results.count > 0 {
+                    
+                    for result in results as! [NSManagedObject] {
+                        if result.valueForKey("newVehicleID") as? Int == 0 {
+                            // result.delete("newPersonID")
+                            context.deleteObject(result)
+                        }
+                        else{
+                            print("here is the NewVehicleId: ",result.valueForKey("newVehicleID"))
+                        }
+                        
+                    }
+                    
+                }
+                
+            } catch {
+                
+                print("Fetch Failed")
+            }
+
+        }
+    }
+    
+    @IBAction func submit(sender: AnyObject) {
+        
+        
         
     }
     
@@ -490,7 +549,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         let webServicesQuery = WebService.init()
         webServicesQuery.initiate(1)
         print(webServicesQuery.printQuery(search.text!))
-        print("Here's your value: ")
+        
 
         dictionaryQuery = webServicesQuery.printQuery(search.text!)
         
@@ -511,11 +570,10 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             dictionaries = myArray[0] as! Dictionary<String, AnyObject>
             
             
-            print("here's the third item", dictionaries)
+        
             
             
-            print(dictionaries["vehicleJurisdiction"])
-//            
+    //
             let alertController = UIAlertController(title: "Vehiculo encontrado!", message:
                 "Al aceptar pasaras al reporte.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: willNotUse))
@@ -531,7 +589,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             marcaField.text = dictionaries["make"] as? String
             modeloField.text = dictionaries["modelos"] as? String
             numeroDeMarbete.text = dictionaries["registrationNumber"] as? String
-            aseguradoraField.text = dictionaries["insuranceCOmpany"] as? String
+            aseguradoraField.text = dictionaries["insuranceCompany"] as? String
             fechaCompraField.text = dictionaries["purchaseDate"] as? String
             fechaExpiracionField.text = dictionaries["expirationDate"] as? String
             yearField.text = dictionaries["year"] as? String
