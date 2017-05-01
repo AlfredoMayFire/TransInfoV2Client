@@ -14,6 +14,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 //    @IBOutlet weak var categoriaPerson: SwiftDropDownList!
 //    @IBOutlet weak var personType: SwiftDropDownList!
     
+    let singleton = Global.sharedGlobal
     
     @IBOutlet weak var rowField: SwiftDropDownList!
     @IBOutlet weak var seatField: SwiftDropDownList!
@@ -73,7 +74,7 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
 
     @IBOutlet weak var listaInfracciones: UITableView!
     
-    var dictionary: [String:String] = [
+    var name: [String:String] = [
         "name" :"",
         "categoriaPersona" :"",
         "tipoPersona" :"",
@@ -115,15 +116,11 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         "name" :"",
         ]
     
-    var dictionaryA: [String:String] = [
-        "numDeTablilla" :"",
-        "marca" :"",
-        "modelo" :"",
-        "year": "",
+    var dictionary: [String:String] = [
         "name" :"",
-        "categoriaPersona" :"",
-        "tipoPersona" :"",
-        "genero": "",
+        "gender" :"",
+        "typeLicense" :"",
+        "numLicense": ""
         ]
     
     
@@ -163,12 +160,12 @@ class PersonExtendedViewController: UIViewController,UITableViewDelegate,UITable
         let webServicesObject = WebService.init()
         webServicesObject.initiate(4)
         
-        print(dictionaryA["name"])
+        print(dictionary["name"])
         
-        nameField.text = dictionaryA["name"]
-        categoriaPersonField.text = dictionaryA["categoriaPersona"]
-        typePersonField.text = dictionaryA["tipoPersona"]
-        genderField.text = dictionaryA["genero"]
+        nameField.text = dictionary["name"]
+        categoriaPersonField.text = dictionary["gender"]
+        typePersonField.text = dictionary["typeLicense"]
+        genderField.text = dictionary["numLicense"]
         
         rowField.isKeyboardHidden = true
         rowField.isDismissWhenSelected = true

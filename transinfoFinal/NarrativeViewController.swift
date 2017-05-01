@@ -20,6 +20,14 @@ class NarrativeViewController: UIViewController {
     @IBOutlet weak var timeArrivalEmergenceField: UITextField!
     @IBOutlet weak var detailField: UITextView!
     
+    var crashID = Dictionary<String,AnyObject>()
+    var narrFK = String()
+    var values: [String:AnyObject] = [
+        "accidentfk":"",
+        "narrfk":""
+    ]
+
+    
     @IBAction func horaNotificadaField(sender: UITextField) {
         let timePicker:UIDatePicker = UIDatePicker()
         
@@ -91,6 +99,9 @@ class NarrativeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let singleton = Global.sharedGlobal
+        
+        singleton.foreignKeys[0].crashBasicInformation = 112
         //colornavigation
         navigationController!.navigationBar.barTintColor = UIColor (red:28.0/255.0, green:69.0/255.0, blue:135.0/255.0, alpha:1.0)
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -120,19 +131,41 @@ class NarrativeViewController: UIViewController {
     }
 
     @IBAction func sendData(sender: AnyObject) {
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageFive", inManagedObjectContext: context)
-//        
-//        
-//        newData.setValue(notifiedTimePoliceField.text,forKey:"horaNotificadaPolicia")
-//        newData.setValue(timeArrivalPoliceField.text,forKey:"horaLlegadaPolicia")
-//        newData.setValue(notifiedTimeEmergenceField.text,forKey:"horaNotificadaMedica")
-//        newData.setValue(timeArrivalEmergenceField.text,forKey:"horaLlegadaMedica")
-//        newData.setValue(detailField.text, forKey: "detallesAccidente")
-//        let request = NSFetchRequest(entityName: "PageFive")
+        
+        let singleton = Global.sharedGlobal
+        
+        let webServicesObject = WebService.init()
+        webServicesObject.addIData("NotifiedTimePolice", value: notifiedTimePoliceField.text)
+        webServicesObject.addIData("TimeOfArrivalPolice", value: timeArrivalPoliceField.text)
+        webServicesObject.addIData("NotifiedTimeEmergencie", value: notifiedTimeEmergenceField.text)
+        webServicesObject.addIData("TimeOfArrivalEmergencie", value: timeArrivalEmergenceField.text)
+        webServicesObject.addIData("Details", value: "TempValue0")
+        
+        
+        crashID = webServicesObject.sendPOSTs(13)
+        print(crashID)
+        let myID = crashID.first!.1
+        let results = myID as? Dictionary<String,AnyObject>
+        
+            values["narrfk"] = (results!["CrashId"]?.integerValue)!
+        
+        if(crashID.first!.0 == "error_code" || crashID.first!.0 == "error"){
+            
+            
+        }else{
+            singleton.foreignKeys[0].narrative = (values["narrfk"]?.integerValue)!
+        }
+        
+        values["accidentfk"] = singleton.foreignKeys[0].crashBasicInformation
+        
+        print(singleton.foreignKeys)
+        print(values)
+        let webServicesObject2 = WebService.init()
+        webServicesObject2.addIData("AccidenteFK", value: values["accidentfk"]?.stringValue)
+        webServicesObject2.addIData("NarrativaFK", value: values["narrfk"]?.stringValue)
+        print(webServicesObject2.PostData)
+        webServicesObject2.sendPOSTs(12)
+
     }
     
     

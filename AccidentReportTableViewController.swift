@@ -126,11 +126,11 @@ class AccidentReportTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let detailsVC = segue.destinationViewController as? ReportFirstStepViewController{
-            detailsVC.objectNum = self.objectNum
+        //if let detailsVC = segue.destinationViewController as? ReportFirstStepViewController{
+            //detailsVC.objectNum = self.objectNum
 //            let myViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("yes") as! ReportFirstStepViewController
 //            self.navigationController?.pushViewController(myViewController, animated: true)
-        }
+        //}
     }
     
     

@@ -36,20 +36,10 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     @IBOutlet weak var search: UITextField!
     
     var dictionary: [String:String] = [
-        "tipoVehiculo" :"",
-        "ocupantes" :"",
-        "numDeTablilla" :"",
-        "jurisdiccion": "",
-        "estado" :"",
-        "vin" :"",
+        "numTablilla" :"",
         "year" :"",
-        "marca": "",
-        "model" :"",
-        "marbete" :"",
-        "aseguradora" :"",
-        "fechaCompra": "",
-        "fechaExpiracion": "",
-        "isUpdate": "no"
+        "make": "",
+        "model" :""
         ]
     var dictionaryQuery = [String:AnyObject] ()
     var content = String()
@@ -60,10 +50,18 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     var objectNum = Int()
     var isUpdating = false
 
+    var vehiclefk = ""
     
     var newVehicleID = Dictionary<String,AnyObject>()
     
     var myArray = Array<AnyObject> ()
+    
+    var values: [String:AnyObject] = [
+        "accidentfk":"",
+        "vehiclefk":"",
+        "personfk":""
+    ]
+
     
     @IBAction func fechaCompraField(sender: UITextField) {
         let datePickerView:UIDatePicker = UIDatePicker()
@@ -105,22 +103,22 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         //ws
         //lena todos los espacios hay un error
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cellIdentifier")
         
-
+        let singleton = Global.sharedGlobal
+        
+        singleton.foreignKeys[0].crashBasicInformation = 112
+        singleton.foreignKeys[0].newPerson = 1
+        singleton.foreignKeys[0].newVehicle = 1
         
         
         let webServicesObject = WebService.init()
         webServicesObject.initiate(5)
         
         
-        typeVehicleField.isKeyboardHidden = true
-        typeVehicleField.isDismissWhenSelected = true
-        typeVehicleField.isArrayWithObject = true
-        typeVehicleField.keyPath = "DescriptionES"
-        typeVehicleField.arrayList = webServicesObject.arrayOfDictionaries("vehicleTypes")
+        
         
         jurisdictionVehicleField.isKeyboardHidden = true
         jurisdictionVehicleField.isDismissWhenSelected = true
@@ -134,87 +132,10 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         //Cargar Automaticamente Fecha
         fechaCompraField.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)
         fechaExpiracionField.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)        
-        typeVehicleField.text = dictionary["tipoVehiculo"]
-        //ocupantesField.text = dictionary["ocupantes"]
-        numeroDeTablilla.text = dictionary["numDeTablilla"]
-        jurisdictionVehicleField.text = dictionary["jurisdiccion"]
-        estadoField.text =  dictionary["estado"]
-        VINField.text = dictionary["vin"]
-        yearField.text = dictionary["year"]
-        marcaField.text = dictionary["marca"]
-        modeloField.text =  dictionary["model"]
-        numeroDeMarbete.text = dictionary["marbete"]
-        aseguradoraField.text =  dictionary["aseguradora"]
-        fechaCompraField.text = dictionary["fechaCompra"]
-        fechaExpiracionField.text = dictionary["fechaExpiracion"]
         
         
         
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let context: NSManagedObjectContext = appDel.managedObjectContext
-        
-        let request = NSFetchRequest(entityName: "PageFour")
-        
-        do {
-            
-            
-            let results = try context.executeFetchRequest(request)
-            
-            
-            
-            if objectNum == 0 {
-                objectNum = results.count + 1
-            }
-            if (objectNum == 0 && results.count == 1){
-                objectNum = results.count + 1
-            }//error aqui
-          //  print("This here is the objectNum being used: ",objectNum)
-    
-            
-            
-            //print("Here is objectNum again",objectNum)
-            
-           // print("Here is result count",results.count)
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//
-//                        
-//                    }
-                    
-//                    print("Here is the object IDs",result.valueForKey("objectNum"))
-                     if let idHolder = objectNum as? Int{
-                        if idHolder == result.valueForKey("objectNum") as? Int{
-                            
-                            print("is updating")
-                            isUpdating = true
-                        }
-                    }
-                    
-//                    print("here is core data objectNum",result.valueForKey("objectNum") as? Int)
-                    //                    if result.valueForKey("objectNum") as? Int == objectNum {
-                    //                        updatingTrue = true
-                    //                        print("yes")
-                    //                    }
-                    
-                    
-                }
-            }
-        }catch{
-            print("Error")
-        }
-        
-        
+               
         search.text = "123"
         
     }
@@ -235,227 +156,16 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let context: NSManagedObjectContext = appDel.managedObjectContext
-        
-        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageFour", inManagedObjectContext: context)
-        
-        
-        if isUpdating {
-         
-            do {
-                let request = NSFetchRequest(entityName: "PageFour")
-                
-                //request.predicate = NSPredicate(format: "objectNum = %@", "objectNum")
-                
-                let results = try context.executeFetchRequest(request)
-                
-                
-                //print(results.count)
-                
-                
-                
-                if results.count > 0 {
-                
-                    for result in results as! [NSManagedObject] {
-//                        print("Time # ",result)
-//                        context.deleteObject(result)
-                        print("Here is objectNum: ",objectNum)
-                        print(result.valueForKey("objectNum"))
-                        if result.valueForKey("objectNum") as? Int == objectNum {
-                            print("Entre")
-                            result.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
-                            result.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
-                            result.setValue(ocupantesField.text,forKey: "ocupantes")
-                            result.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
-                            result.setValue(estadoField.text,forKey:"estadoField")
-                            result.setValue(VINField.text,forKey:"vinField")
-                            result.setValue(yearField.text,forKey:"yearField")
-                            result.setValue(marcaField.text,forKey:"marcaField")
-                            result.setValue(modeloField.text,forKey:"modeloField")
-                            result.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
-                            result.setValue(aseguradoraField.text,forKey:"aseguradoraField")
-                            
-                            result.setValue(fechaCompraField.text,forKey:"fechaCompraField")
-                            result.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
-                            result.setValue(objectNum, forKey: "objectNum")
-                            if result.valueForKey("objectNum") as? Int == 0 {
-                                context.deleteObject(result)
-                                do{
-                                    try context.save()
-                                    print("did it")
-                                }catch{
-                                    print("couldn't do it")
-                                }
-                                
-                            
-                                
-                            }
-                        }
-                        
-                        
-                    }
-                }
-                do {
-                    
-                    try context.save()
-                    print("Vehicle Saved")
-                    
-                } catch {
-                    
-                    print("There was a problem!")
-                    
-                }
-
-            }catch{
-                print("Error")
-            }
-
-        }
-        
-        else{
-            
-            
-            newData.setValue(typeVehicleField.text,forKey: "tipoVehiculo")
-            newData.setValue(jurisdictionVehicleField.text,forKey: "jurisdicionVehiculo")
-           // newData.setValue(ocupantesField.text,forKey: "ocupantes")
-            newData.setValue(numeroDeTablilla.text,forKey:"numDeTablilla")
-            newData.setValue(estadoField.text,forKey:"estadoField")
-            newData.setValue(VINField.text,forKey:"vinField")
-            newData.setValue(yearField.text,forKey:"yearField")
-            newData.setValue(marcaField.text,forKey:"marcaField")
-            newData.setValue(modeloField.text,forKey:"modeloField")
-            newData.setValue(numeroDeMarbete.text,forKey:"numeroDeMarbete")
-            newData.setValue(aseguradoraField.text,forKey:"aseguradoraField")
-            
-            newData.setValue(fechaCompraField.text,forKey:"fechaCompraField")
-            newData.setValue(fechaExpiracionField.text,forKey:"fechaExpiracionField")
-            newData.setValue(objectNum, forKey: "objectNum")
-            
-            let request = NSFetchRequest(entityName: "PageFour")
-            
-            
-            
-            request.returnsObjectsAsFaults = false
-            do {
-                
-                try context.save()
-                print("Vehicle Saved")
-                
-            } catch {
-                
-                print("There was a problem!")
-                
-            }
-            
-            //onlynecessaryifneedresults
-//            do {
-//                let results = try context.executeFetchRequest(request)
-//                
-//                
-//                
-//                if results.count > 0 {
-//                    
-//                    for result in results as! [NSManagedObject] {
-//                        print("For object #",result.valueForKey("objectNum")!)
-//                        print(result.valueForKey("vinField")!)
-//                        print(result.valueForKey("yearField")!)
-//                        print(result.valueForKey("tipoVehiculo")!)
-//                        print(result.valueForKey("jurisdicionVehiculo")!)
-//                        print(result.valueForKey("ocupantes")!)
-//                        print(result.valueForKey("numDeTablilla")!)
-//                        print(result.valueForKey("estadoField")!)
-//                        print(result.valueForKey("marcaField")!)
-//                        print(result.valueForKey("modeloField")!)
-//                        print(result.valueForKey("numeroDeMarbete")!)
-//                        print(result.valueForKey("aseguradoraField")!)
-//                        print(result.valueForKey("fechaCompraField")!)
-//                        print(result.valueForKey("fechaExpiracionField")!)
-//                        
-//                    }
-//                    
-//                }
-//                
-//            } catch {
-//                
-//                print("Fetch Failed")
-//            }
-        }
-        
-        
-        let request = NSFetchRequest(entityName: "PageFour")
-        request.returnsObjectsAsFaults = false
-
-        
-        do {
-            let results = try context.executeFetchRequest(request)
-            
-            
-            
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    print("For object #",result.valueForKey("objectNum")!)
-//                    print(result.valueForKey("vinField")!)
-//                    print(result.valueForKey("yearField")!)
-//                    print(result.valueForKey("tipoVehiculo")!)
-//                    print(result.valueForKey("jurisdicionVehiculo")!)
-//                    print(result.valueForKey("ocupantes")!)
-//                    print(result.valueForKey("numDeTablilla")!)
-//                    print(result.valueForKey("estadoField")!)
-//                    print(result.valueForKey("marcaField")!)
-//                    print(result.valueForKey("modeloField")!)
-//                    print(result.valueForKey("numeroDeMarbete")!)
-//                    print(result.valueForKey("aseguradoraField")!)
-//                    print(result.valueForKey("fechaCompraField")!)
-//                    print(result.valueForKey("fechaExpiracionField")!)
-                    if (result.valueForKey("objectNum") as? Int == 0){
-                        context.deleteObject(result)
-                        do{
-                            try context.save()
-                            print("did it")
-                        }catch{
-                            print("couldn't do it")
-                        }
-                    }
-                    
-                }
-                
-            }
-            
-        }catch {
-            
-            print("Fetch Failed")
-        }
-
-        
-        
-        
-//        if segue.identifier == "exitToDataEntry"{
-        
-            dictionary["numDeTablilla"] = numeroDeTablilla.text
-        dictionary["model"] = modeloField.text
-        dictionary["marca"] = marcaField.text
-        dictionary["year"] = yearField.text
-            if let detailsVC = segue.destinationViewController as? VehicleExtendedViewController{
-            detailsVC.dictionary = self.dictionary
-           // print("Leaving VC")
-            objectNum = 0
-            isUpdating = false
-           // }
-        }
-        
-        //post time
+                //post time
         
         print("--------------------")
         
+        let singleton = Global.sharedGlobal
+        
+        values["personfk"] = singleton.foreignKeys[0].newPerson
+        
         let webServicesObjectPOST = WebService.init()
-        
-        webServicesObjectPOST.addIData("VehicleType", value: typeVehicleField.text)
-        
-//        webServicesObjectPOST.addIData("Occupants", value: ocupantesField.text)
-        
+       
         webServicesObjectPOST.addIData("PlateNumber", value: numeroDeTablilla.text)
         
         webServicesObjectPOST.addIData("VehicleJurisdiction", value: jurisdictionVehicleField.text)
@@ -477,63 +187,58 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         webServicesObjectPOST.addIData("PurchaseDate", value: fechaCompraField.text)
         
         webServicesObjectPOST.addIData("ExpirationDate", value: fechaExpiracionField.text)
+        
+        webServicesObjectPOST.addIData("idPersonaFK", value: values["personfk"]?.stringValue)
+        
         print(webServicesObjectPOST.PostData)
         
         newVehicleID = webServicesObjectPOST.sendPOSTs(4)
 
         
-        let myID = newVehicleID["success"]
-        let results = myID as? Dictionary<String,AnyObject>
-        if results!["NewVehicleId"] != nil{
-            print(results!["NewVehicleId"])
-            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        if(newVehicleID.first!.0 == "error_code" || newVehicleID.first!.0 == "error"){
+            let alertController = UIAlertController(title: "No has llenado todos los campos o has puesto un valor erroneo.", message:
+                "Por favor llena/arregla los campos.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
             
-            let context: NSManagedObjectContext = appDel.managedObjectContext
-            
-            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
-            
-            newData.setValue(results!["NewVehicleId"], forKey: "newVehicleID")
-            do {
-                
-                try context.save()
-                
-            } catch {
-                
-                print("There was a problem!")
-                
-            }
-            let request = NSFetchRequest(entityName: "Posts")
-            
-            
-            
-            request.returnsObjectsAsFaults = false
-            
-            do {
-                let results = try context.executeFetchRequest(request)
-                
-                
-                
-                if results.count > 0 {
-                    
-                    for result in results as! [NSManagedObject] {
-                        if result.valueForKey("newVehicleID") as? Int == 0 {
-                            // result.delete("newPersonID")
-                            context.deleteObject(result)
-                        }
-                        else{
-                            print("here is the NewVehicleId: ",result.valueForKey("newVehicleID"))
-                        }
-                        
-                    }
-                    
-                }
-                
-            } catch {
-                
-                print("Fetch Failed")
-            }
+            newVehicleID.removeAll()
+        }else{
+            let myID = newVehicleID.first!.1
+            let results = myID as? Dictionary<String,AnyObject>
 
+            print(results!["NewVehicleId"])
+            singleton.foreignKeys[0].newVehicle = (results!["NewVehicleId"]?.integerValue)!
         }
+        
+        values["vehiclefk"] = singleton.foreignKeys[0].newVehicle
+        values["accidentfk"] = singleton.foreignKeys[0].crashBasicInformation
+        
+        
+        
+        print(singleton.foreignKeys)
+        
+        
+        
+        let webServicesObjectPOST2 = WebService.init()
+        webServicesObjectPOST2.clearPostData()
+        webServicesObjectPOST2.addIData("Accidentfk", value: values["accidentfk"]?.stringValue)
+        webServicesObjectPOST2.addIData("Vehiclefk", value: values["vehiclefk"]?.stringValue)
+        webServicesObjectPOST2.sendPOSTs(11)
+
+        dictionary["numTablilla"] = numeroDeTablilla.text
+        dictionary["year"] = yearField.text
+        dictionary["make"] = marcaField.text
+        dictionary["model"] = modeloField.text
+        
+        let newVehicle = Vehicle(vehicle: dictionary)
+        singleton.listVehicle.append(newVehicle)
+        
+        singleton.listNum[0] += 1
+        
+        print(singleton.listVehicle)
+        print(singleton.listNum)
+        
     }
     
     @IBAction func submit(sender: AnyObject) {
@@ -553,19 +258,14 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
 
         dictionaryQuery = webServicesQuery.printQuery(search.text!)
         
-        //put first query for success key
-        //print(dictionaryQuery.first!.1)
         vehicle = dictionaryQuery.first!.1
-        
-        //put vehile list into array of anyobjects because vehicle is an anyobject dictionary
-        //print(vehicle!["VehicleList"].debugDescription)
         
         myArray = (vehicle?["VehicleList"])! as! Array<AnyObject>
         
+        
+        
         if myArray.count != 0 {
-            //print("Here's the second item",myArray[0])
-            
-            //put first value of array into dictionaries which is just a single dictionary
+
             
             dictionaries = myArray[0] as! Dictionary<String, AnyObject>
             
@@ -580,19 +280,6 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
             alertController.addAction(UIAlertAction(title: "Utilizar", style: UIAlertActionStyle.Default, handler: foundVehicle))
             
             self.presentViewController(alertController, animated: true, completion: nil)
-            
-            jurisdictionVehicleField.text = dictionaries["vehicleJurisdiction"] as? String
-            numeroDeTablilla.text = dictionaries["plateNumber"] as? String
-            estadoField.text = dictionaries["state"] as? String
-            typeVehicleField.text = dictionaries["vehicleType"] as? String
-            VINField.text = dictionaries["vin"] as? String
-            marcaField.text = dictionaries["make"] as? String
-            modeloField.text = dictionaries["modelos"] as? String
-            numeroDeMarbete.text = dictionaries["registrationNumber"] as? String
-            aseguradoraField.text = dictionaries["insuranceCompany"] as? String
-            fechaCompraField.text = dictionaries["purchaseDate"] as? String
-            fechaExpiracionField.text = dictionaries["expirationDate"] as? String
-            yearField.text = dictionaries["year"] as? String
             
             
         }
@@ -686,7 +373,7 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         saveSubmit.title = "Submit"
         
         
-        //Utiliza Core para guardar global
+        //
         
         
         
@@ -698,7 +385,6 @@ class NewVehicleController: UIViewController,UITableViewDataSource,UITableViewDe
         jurisdictionVehicleField.text = ""
         numeroDeTablilla.text = ""
         estadoField.text = ""
-        typeVehicleField.text = ""
         VINField.text = ""
         marcaField.text = ""
         modeloField.text = ""

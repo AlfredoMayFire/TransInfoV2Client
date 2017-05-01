@@ -49,12 +49,6 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
     
     var arrayList: NSArray = NSArray()
     
-    var objectNum = Int()
-    
-    var crashID = Dictionary<String,AnyObject>()
-    
-  //  let cellReuseIdentifier = "cell"
-    //Dirección
     let manager = CLLocationManager()
 
 
@@ -96,115 +90,9 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         dateTextField.text = dateFormatter.stringFromDate(sender.date)
     }
     
-    @IBAction func ReportFirst(sender: AnyObject) {
-        print ("------------")
-      //  print (typeAccident.text)
-        let  webServicesObjectPOST = WebService.init()
-        webServicesObjectPOST.addIData("CrashType", value: typeAccident.text)
-        webServicesObjectPOST.addIData("CaseNumber", value: numberCaseField.text)
-        webServicesObjectPOST.addIData("CrashDate", value: dateTextField.text)
-        webServicesObjectPOST.addIData("Hour", value: hourField.text)
-        webServicesObjectPOST.addIData("UnitVehiculos", value: numberVehiclesFIeld.text)
-        webServicesObjectPOST.addIData("UnitAutomovilistas", value: automovilistasField.text)
-        webServicesObjectPOST.addIData("UnitPedestrians", value: UnitPedestrians.text)
-        webServicesObjectPOST.addIData("UnitInjured", value: heridosField.text)
-        webServicesObjectPOST.addIData("UnitFatalaties", value: fatalitiesField.text)
-        webServicesObjectPOST.addIData("Latitude", value: latitudField.text)
-        webServicesObjectPOST.addIData("Longitude", value: longitudField.text)
-        webServicesObjectPOST.addIData("Address", value: direccionField.text)
-        webServicesObjectPOST.addIData("CityDescriptionES", value: stateField.text)
-        webServicesObjectPOST.addIData("CountryDescriptionES", value: municipioField.text)
-        webServicesObjectPOST.addIData("NearToDescriptionEs", value: cercadeField.text)
-        webServicesObjectPOST.addIData("Name", value: nameField.text)
-        webServicesObjectPOST.addIData("Distance", value: distanceField.text)
-        webServicesObjectPOST.addIData("MeasurementDescriptionES", value: medidaField.text)
-        webServicesObjectPOST.addIData("DirectionDescriptionES", value: puntoCardinalField.text)
-        webServicesObjectPOST.addIData("PropertyDescriptionES", value: propertyField.text)
-        webServicesObjectPOST.addIData("LocationDescriptionES", value: locationField.text)
-        webServicesObjectPOST.addIData("ZoneTypeDescriptionES", value: typeZonaField.text)
-        webServicesObjectPOST.addIData("Officer_fk", value: "2")//valor se captura del login
-        print(webServicesObjectPOST.PostData["CrashType"])
-        crashID = webServicesObjectPOST.sendPOSTs(1)
-        let myID = crashID["success"]
-        let results = myID as? Dictionary<String,AnyObject>
-        if results!["CrashId"] != nil {
-            print("Here it is!",results!["CrashId"])
-            let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            let context: NSManagedObjectContext = appDel.managedObjectContext
-            
-            let newData = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
-            
-            newData.setValue(results!["CrashId"], forKey: "crashBasicInformation")
-            
-            
-            
-//            do {
-//                
-//                try context.save()
-//                
-//            } catch {
-//                
-//                print("There was a problem!")
-//                
-//            }
-            
-            
-            
-            let request = NSFetchRequest(entityName: "Posts")
-            
-            
-            
-            request.returnsObjectsAsFaults = false
-            do {
-                
-                try context.save()
-                
-            } catch {
-                
-                print("There was a problem!")
-                
-            }
-            
-            
-            do {
-                let results = try context.executeFetchRequest(request)
-                
-                
-                
-                if results.count > 0 {
-                    
-                    for result in results as! [NSManagedObject] {
-                        print("here is the crashid: ",result.valueForKey("crashBasicInformation"))
-                    }
-                    
-                }
-                
-            } catch {
-                
-                print("Fetch Failed")
-            }
-            
+    
+    
 
-        }
-    
-        
-        print ("******************")
-       
-        
-    }
-    
- 
-   
-  //  @IBAction func guardarReportFirst(sender: AnyObject) {
-      
-        //print(typeAccident.text)
-//        let  webServicesObjectPOST = WebService.init()
-//        webServicesObjectPOST.addIData("CrashType", value: typeAccident.text)
-    
-        
-        
-   // }
     
     
     override func viewDidLoad() {
@@ -217,15 +105,20 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-//        let newObject = objectNumManager.init()
-//        objectNum = newObject.getNum()
-//        print(objectNum)
+        let singleton = Global.sharedGlobal
+        
+        let accidentConditionFK = Info(crashBasicInformation: 0, accidentCondition: 0, newVehicle:0,newPerson: 0,personExtended:0,vehicleExtended:0,narrative:0)
+        singleton.foreignKeys.append(accidentConditionFK)
+        
+        let listPeopleInit = People(person: ["":""])
+        singleton.listPeople.append(listPeopleInit)
+        
+        print(singleton.foreignKeys)
+
         
         let webServicesObject = WebService.init()
         webServicesObject.initiate(1)
         
-       // arrayList = webServicesObject.arrayOfDictionaries("ListVehicleByPlateNumber")
-        //print(webServicesObject.printQuery())
         
         typeAccident.isKeyboardHidden = true
         typeAccident.isDismissWhenSelected = true
@@ -312,6 +205,71 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
 //        print("Here it is, ",objectNum)
     }
     
+    @IBAction func ReportFirst(sender: AnyObject) {
+        print ("------------")
+        
+        
+        //Crear los keys para el post
+        
+        let  webServicesObjectPOST = WebService.init()
+        webServicesObjectPOST.addIData("CrashType", value: typeAccident.text)
+        webServicesObjectPOST.addIData("CaseNumber", value: numberCaseField.text)
+        webServicesObjectPOST.addIData("CrashDate", value: dateTextField.text)
+        webServicesObjectPOST.addIData("Hour", value: hourField.text)
+        webServicesObjectPOST.addIData("UnitVehiculos", value: numberVehiclesFIeld.text)
+        webServicesObjectPOST.addIData("UnitAutomovilistas", value: automovilistasField.text)
+        webServicesObjectPOST.addIData("UnitPedestrians", value: UnitPedestrians.text)
+        webServicesObjectPOST.addIData("UnitInjured", value: heridosField.text)
+        webServicesObjectPOST.addIData("UnitFatalaties", value: fatalitiesField.text)
+        webServicesObjectPOST.addIData("Latitude", value: latitudField.text)
+        webServicesObjectPOST.addIData("Longitude", value: longitudField.text)
+        webServicesObjectPOST.addIData("Address", value: direccionField.text)
+        webServicesObjectPOST.addIData("CityDescriptionES", value: stateField.text)
+        webServicesObjectPOST.addIData("CountryDescriptionES", value: municipioField.text)
+        webServicesObjectPOST.addIData("NearToDescriptionEs", value: cercadeField.text)
+        webServicesObjectPOST.addIData("Name", value: nameField.text)
+        webServicesObjectPOST.addIData("Distance", value: distanceField.text)
+        webServicesObjectPOST.addIData("MeasurementDescriptionES", value: medidaField.text)
+        webServicesObjectPOST.addIData("DirectionDescriptionES", value: puntoCardinalField.text)
+        webServicesObjectPOST.addIData("PropertyDescriptionES", value: propertyField.text)
+        webServicesObjectPOST.addIData("LocationDescriptionES", value: locationField.text)
+        webServicesObjectPOST.addIData("ZoneTypeDescriptionES", value: typeZonaField.text)
+        webServicesObjectPOST.addIData("Officer_fk", value: "2")//valor se captura del login
+        var crashID = webServicesObjectPOST.sendPOSTs(1)
+        
+        //guardar info en singleton global
+        
+        let singleton = Global.sharedGlobal
+        
+        
+        
+        if (crashID.first!.0 == "error_code" || crashID.first!.0 == "error")  {
+            let alertController = UIAlertController(title: "No has llenado todos los campos o has puesto un valor erroneo.", message:
+                "Por favor llena/arregla los campos.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            crashID.removeAll()
+            
+        }else{
+            let myID = crashID.first!.1
+            let results = myID as? Dictionary<String,AnyObject>
+            print("Here it is!",results!["CrashId"])
+            singleton.foreignKeys[0].crashBasicInformation = (results!["CrashId"]?.integerValue)!
+            print(singleton.foreignKeys[0].crashBasicInformation)
+            
+        }
+        
+        
+        
+        
+        
+        
+        print ("******************")
+        
+        
+    }
+    
     
     func addInfoDirection(info: String?) ->String{
     
@@ -354,92 +312,6 @@ class ReportFirstStepViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func saveData(sender: AnyObject) {
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        let newData = NSEntityDescription.insertNewObjectForEntityForName("PageOne", inManagedObjectContext: context)
-//        
-//        
-//        newData.setValue(typeAccident.text,forKey: "tipoAccidente")
-//        newData.setValue(numberCaseField.text,forKey: "numCaso")
-//        newData.setValue(dateTextField.text,forKey: "fechaAccidente")
-//        newData.setValue(hourField.text,forKey:"hora")
-//        newData.setValue(numberVehiclesFIeld.text,forKey:"vehiculoInvolu")
-//        newData.setValue(automovilistasField.text,forKey:"automovilistaInvolu")
-//        newData.setValue(heridosField.text,forKey:"heridosInvolu")
-//        newData.setValue(fatalitiesField.text,forKey:"fatalidadesInvolu")
-//        newData.setValue(latitudField.text,forKey:"coordX")
-//        newData.setValue(longitudField.text,forKey:"coordY")
-//        newData.setValue(stateField.text,forKey:"estado")
-//        //newData.setValue ("direccionField.text",forKey:"fechaAccidente")
-//        newData.setValue(municipioField.text,forKey:"municipio")
-//        newData.setValue(cercadeField.text,forKey:"cercaDe")
-//        newData.setValue(nameField.text,forKey:"nombre")
-//        newData.setValue(distanceField.text,forKey:"distancia")
-//        newData.setValue(medidaField.text,forKey:"medida")
-//        newData.setValue(puntoCardinalField.text,forKey:"puntoCardinal")
-//       // newData.setValue(propertyTypeField.text,forKey:"tipoPropiedad")
-//        newData.setValue(locationField.text,forKey:"ubicacion")
-//        newData.setValue(typeZonaField.text,forKey:"tipoZona")
-//        
-//        let request = NSFetchRequest(entityName: "PageOne")
-//        
-//        
-//        
-//       request.returnsObjectsAsFaults = false
-//        do {
-//            
-//            try context.save()
-//            
-//        } catch {
-//            
-//            print("There was a problem!")
-//            
-//        }
-//        
-//        
-//        do {
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    print(result.objectID)
-//                    print(result.valueForKey("tipoAccidente")!)
-//                    print(result.valueForKey("numCaso")!)
-//                    print(result.valueForKey("fechaAccidente")!)
-//                    print(result.valueForKey("hora")!)
-//                    print(result.valueForKey("vehiculoInvolu")!)
-//                    print(result.valueForKey("automovilistaInvolu")!)
-//                    print(result.valueForKey("heridosInvolu")!)
-//                    print(result.valueForKey("fatalidadesInvolu")!)
-//                    print(result.valueForKey("coordX")!)
-//                    print(result.valueForKey("coordY")!)
-//                    print(result.valueForKey("estado")!)
-//                    print(result.valueForKey("municipio")!)
-//                    print(result.valueForKey("cercaDe")!)
-//                    print(result.valueForKey("nombre")!)
-//                    print(result.valueForKey("distancia")!)
-//                    print(result.valueForKey("medida")!)
-//                    print(result.valueForKey("puntoCardinal")!)
-//                    print(result.valueForKey("ubicacion")!)
-//                    print(result.valueForKey("tipoZona")!)
-//                    
-//                }
-//                
-//            }
-//            
-//        } catch {
-//            
-//            print("Fetch Failed")
-//        }
-//        
-        
-    }
 
     
     

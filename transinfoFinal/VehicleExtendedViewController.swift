@@ -128,42 +128,39 @@ class VehicleExtendedViewController: UIViewController{
     @IBAction func guardarCondicionAccident(sender: AnyObject) {
         print ("------------")
         
-        //  Vehicle Information
-        for count in seleccionMultiple{
-            print(seleccionMultiple[count])
-        }
-        
-
-        
         let  webServicesObjectPOST = WebService.init()
         
-        webServicesObjectPOST.addIData("MotorVehicle", value: typeVehicleField.text)
+        webServicesObjectPOST.addIData("VehicleType", value: typeVehicleField.text)
         
-        webServicesObjectPOST.addIData("TripDirection", value: direccionViajeField.text)
+        webServicesObjectPOST.addIData("Occupants", value: "TempValue0")
         
-        webServicesObjectPOST.addIData("SpecialFunctionMotor", value: funcionEspecialField.text)
+        webServicesObjectPOST.addIData("VehicleMotor", value: "Tempvalue1")
         
-        webServicesObjectPOST.addIData("EmergencyUse", value: usoVehiculoField.text)
+        webServicesObjectPOST.addIData("DirectionTripCB", value: direccionViajeField.text)
+        
+        webServicesObjectPOST.addIData("FunctionSpecialMVT", value: funcionEspecialField.text)
+        
+        webServicesObjectPOST.addIData("MotorEmergencyVU", value: usoVehiculoField.text)
         
         webServicesObjectPOST.addIData("MPH", value: mphField.text)
         
-        webServicesObjectPOST.addIData("PostedSpeedLimit", value: mphdosField.text)
+        webServicesObjectPOST.addIData("MPHDescription", value: mphdosField.text)
         
-        webServicesObjectPOST.addIData("MotorVehicleManeuver", value: maniobraField.text)
+        webServicesObjectPOST.addIData("ManeuverVehicleMotor", value: maniobraField.text)
         
         //capturar el  idNewVehicleFK
         
         //Information of the road whre the vehicle was passing
         
-        webServicesObjectPOST.addIData("RoadDescription", value: roadDescriptionField.text)
+        webServicesObjectPOST.addIData("DescriptionRoad", value: roadDescriptionField.text)
         
         webServicesObjectPOST.addIData("Alignment", value: alineamientoField.text)
         
         webServicesObjectPOST.addIData("Slope", value: inclinacionField.text)
         
-        webServicesObjectPOST.addIData("Cantidad", value: cantidadField.text)
+        webServicesObjectPOST.addIData("LaneCantidad", value: cantidadField.text)
         
-        webServicesObjectPOST.addIData("CategoriaCarril", value: categoriaField.text)
+        webServicesObjectPOST.addIData("LaneCategoria", value: categoriaField.text)
         
         //Selection Tipo Controles de Transito. TCDTypeSlection
         
@@ -177,39 +174,54 @@ class VehicleExtendedViewController: UIViewController{
         
         
         
-        webServicesObjectPOST.addIData("TipoCarril", value: typeCarrilField.text)
+        webServicesObjectPOST.addIData("LaneTipoCarril", value: typeCarrilField.text)
         
-        webServicesObjectPOST.addIData("OperationOrLost", value: operacionField.text)
+        
+        
+        
+        
+        //TypeControlTraffic AffectedArea VehicleFK
+        
+        webServicesObjectPOST.addIData("TypeControlTraffic", value: "TempValue2")
+        webServicesObjectPOST.addIData("AffectedArea", value: "TempValue3")
+        webServicesObjectPOST.addIData("VehicleFK", value: "TempValue4")
+        
+        
+        
+        
+        
+        
+        webServicesObjectPOST.addIData("InOperationLost", value: operacionField.text)
         
         //capturar el  idNewVehicleFK
         
         //Information Event Vehicle
         
-        webServicesObjectPOST.addIData("PrimeraCategoria", value: primerCategoria.text)
+        webServicesObjectPOST.addIData("PrimeraCategoriaEvent", value: primerCategoria.text)
         
-        webServicesObjectPOST.addIData("SegundaCategoria", value: segundaCategoria.text)
+        webServicesObjectPOST.addIData("SegundaCategoriaEvent", value: segundaCategoria.text)
         
-        webServicesObjectPOST.addIData("TerceraCategoria", value: terceraCategoria.text)
+        webServicesObjectPOST.addIData("TerceraCategoriaEvent", value: terceraCategoria.text)
         
         webServicesObjectPOST.addIData("CuartaCategoria", value: cuartaCategoria.text)
         
-        webServicesObjectPOST.addIData("PrimerEvento", value: primerEvento.text)
+        webServicesObjectPOST.addIData("PrimerEvent", value: primerEvento.text)
         
-        webServicesObjectPOST.addIData("SegundoEvento", value: segundoEvento.text)
+        webServicesObjectPOST.addIData("SegundoEvent", value: segundoEvento.text)
         
-        webServicesObjectPOST.addIData("TercerEvento", value: tercerEvento.text)
+        webServicesObjectPOST.addIData("TecerEvent", value: tercerEvento.text)
         
-        webServicesObjectPOST.addIData("CuartoEvento", value: cuartoEvento.text)
+        webServicesObjectPOST.addIData("CuartoEvent", value: cuartoEvento.text)
         
         webServicesObjectPOST.addIData("BusUse", value: usoBusField.text)
         
-        webServicesObjectPOST.addIData("LeftPlace", value: abandonoLugarField.text)
+        webServicesObjectPOST.addIData("LefthPlace", value: abandonoLugarField.text)
         
         webServicesObjectPOST.addIData("TowedDamage", value: remolcadoField.text)
         
-        webServicesObjectPOST.addIData("PrimerDefectoMecanico", value: primerDefecto.text)
+        webServicesObjectPOST.addIData("PrimerDefectoMecánico", value: primerDefecto.text)
         
-        webServicesObjectPOST.addIData("SegundoDefectoMecanico", value: segundoDefecto.text)
+        webServicesObjectPOST.addIData("SegundoDefectoMecánico", value: segundoDefecto.text)
         
         //capturar el  idNewVehicleFK
         
@@ -233,15 +245,15 @@ class VehicleExtendedViewController: UIViewController{
         
         webServicesObjectPOST.addIData("CommercialVehicleUse", value: usoVehiculoComercialField.text)
         
-        webServicesObjectPOST.addIData("MovingVehicle", value: vehiculoMovimientoField.text)
+        webServicesObjectPOST.addIData("VehicleMoving", value: vehiculoMovimientoField.text)
         
         webServicesObjectPOST.addIData("AuthorizedDriver", value: conductorAutorizadoField.text)
         
-        webServicesObjectPOST.addIData("InspectionDate", value: inspeccionDiaField.text)
+        webServicesObjectPOST.addIData("InspectionUpdate", value: inspeccionDiaField.text)
         
         webServicesObjectPOST.addIData("SpecialPermit", value: permisoEspecialField.text)
         
-        webServicesObjectPOST.addIData("GrosWeight", value: pesoBrutoField.text)
+        webServicesObjectPOST.addIData("GrossWeight", value: pesoBrutoField.text)
         
         webServicesObjectPOST.addIData("TotalAxis", value: cantidadEjesField.text)
         
@@ -253,11 +265,12 @@ class VehicleExtendedViewController: UIViewController{
         
         webServicesObjectPOST.addIData("DiamondIdNumber", value: numeroIdentificacionField.text)
         
-        webServicesObjectPOST.addIData("DueCollision", value: huboDerrameMPField.text)
+        webServicesObjectPOST.addIData("ThereHazardousMaterial", value: huboDerrameMPField.text)
         
         //captura el fk vehicle
+        print(webServicesObjectPOST.PostData)
         
-        webServicesObjectPOST.sendPOSTs(6)
+        print(webServicesObjectPOST.sendPOSTs(6))
         
     }
     
@@ -607,586 +620,9 @@ class VehicleExtendedViewController: UIViewController{
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // areaAfectadaField.text
-        //huboDerrameMPField.text
-        // tipoControlesField.text
-        
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let context: NSManagedObjectContext = appDel.managedObjectContext
-//        
-//        
-//        
-//        //Will update each entity individually.
-//        if isUpdating{
-//            //entity one
-//            do {
-//            let request1 = NSFetchRequest(entityName: "PageSix")
-//            let results1 = try context.executeFetchRequest(request1)
-//            
-//            if results1.count > 0 {
-//                
-//                for result in results1 as! [NSManagedObject] {
-//                        if result.valueForKey("objectNum") as? Int == objectNum {
-//                                                result.setValue(typeVehicleField.text,forKey: "tipoVehiculoMotor")
-//                        result.setValue(direccionViajeField.text,forKey: "direccionDeViaje")
-//                        result.setValue(funcionEspecialField.text,forKey: "funcionEspecial")
-//                        result.setValue(usoVehiculoField.text,forKey:"usoDeVehiculo")
-//                        result.setValue(maniobraField.text,forKey:"maniobra")
-//                        result.setValue(mphField.text,forKey:"mph")
-//                        result.setValue(mphdosField.text,forKey:"limiteDeVelocidad")
-//                        result.setValue(objectNum, forKey: "objectNum")
-//                        result.setValue(objectNum, forKey: "objectNum")
-//                    
-//                        if result.valueForKey("objectNum") as? Int == 0 {
-//                            context.deleteObject(result)
-//                            do{
-//                                try context.save()
-//                                                            }catch{
-//                                print("couldn't do it")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            do {
-//                
-//                try context.save()
-//                print("Vehicle Saved")
-//                
-//            } catch {
-//                
-//                print("There was a problem!")
-//                
-//            }
-//            
-//        }catch{
-//            print("Error")
-//            }
-//            //entity two
-//            do {
-//                let request2 = NSFetchRequest(entityName: "PageSeven")
-//                
-//                let results2 = try context.executeFetchRequest(request2)
-//            
-//                if results2.count > 0 {
-//                    
-//                    for result in results2 as! [NSManagedObject] {
-//                            if result.valueForKey("objectNum") as? Int == objectNum {
-//                                result.setValue(alineamientoField.text, forKey: "alineamiento")
-//                                result.setValue(categoriaField.text, forKey: "categoriaCarril")
-//                                result.setValue(roadDescriptionField.text, forKey: "descripcionCarretera")
-//                                result.setValue(inclinacionField.text, forKey: "inclinacion")
-//                                result.setValue(operacionField.text, forKey: "operationOrLost")
-//                                result.setValue(typeCarrilField.text, forKey: "tipoCarril")
-//                                result.setValue(cantidadField.text, forKey: "cantidadCarril")
-//                                result.setValue(objectNum, forKey: "objectNum")
-//
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    try context.save()
-//                } catch {
-//                    print("There was a problem!")
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//            //entity three
-//            do {
-//                let request3 = NSFetchRequest(entityName: "PageEight")
-//                
-//                
-//                let results3 = try context.executeFetchRequest(request3)
-//                    if results3.count > 0 {
-//                    
-//                    for result in results3 as! [NSManagedObject] {
-//                            if result.valueForKey("objectNum") as? Int == objectNum {
-//                        
-//                                result.setValue(primerCategoria.text, forKey: "primeraCategoria")
-//                                result.setValue(segundaCategoria.text, forKey: "segundaCategoria")
-//                                result.setValue(terceraCategoria.text, forKey: "terceraCategoria")
-//                                result.setValue(cuartaCategoria.text, forKey: "cuartaCategoria")
-//                                result.setValue(primerEvento.text, forKey: "primerEvento")
-//                                result.setValue(segundoEvento.text, forKey: "segundoEvento")
-//                                result.setValue(tercerEvento.text, forKey: "tercerEvento")
-//                                result.setValue(cuartoEvento.text, forKey: "cuartoEvento")
-//                                result.setValue(usoBusField.text, forKey: "busUse")
-//                                result.setValue(abandonoLugarField.text, forKey: "leftPlace")
-//                                result.setValue(remolcadoField.text, forKey: "towedDamage")
-//                                result.setValue(primerDefecto.text, forKey: "primerDefectoMec")
-//                                result.setValue(segundoDefecto.text, forKey: "segundoDefectoMec")
-//                                result.setValue(objectNum, forKey: "objectNum")
-//                            
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    
-//                    try context.save()
-//                    print("Vehicle Saved")
-//                    
-//                } catch {
-//                    
-//                    print("There was a problem!")
-//                    
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//            //entity four
-//            do {
-//                let request4 = NSFetchRequest(entityName: "PageNine")
-//                
-//                let results4 = try context.executeFetchRequest(request4)
-//                
-//                    if results4.count > 0 {
-//                    
-//                    for result in results4 as! [NSManagedObject] {
-//                            if result.valueForKey("objectNum") as? Int == objectNum {
-//                                
-//                            result.setValue(numeroIdentificacionField.text, forKey: "diamondIDNumber")
-//                            result.setValue(usoVehiculoComercialField.text, forKey: "commercialVehicle")
-//                            result.setValue(vehiculoMovimientoField.text, forKey: "movingVehicle")
-//                            result.setValue(inspeccionDiaField.text, forKey: "inspectionDate")
-//                            result.setValue(gradoDanioField.text, forKey: "extendDamage")//unsure
-//                            result.setValue(conductorAutorizadoField.text, forKey: "authorizedDriver")
-//                            result.setValue(confVehiculo.text, forKey: "vehicleConfiguration")
-//                            result.setValue(vehiculoContieneMPField.text, forKey: "hazardousMaterial")//unsure
-//                            result.setValue(cantidadEjesField.text, forKey: "totalAxis")
-//                            result.setValue(permisoEspecialField.text, forKey: "specialPermit")
-//                            result.setValue(tipoVehiculoCargaField.text, forKey: "heavyVehicleType")
-//                            result.setValue(pesoBrutoField.text, forKey: "grossWeight")
-//                            result.setValue(PuntoInicialField.text, forKey: "initialContactPoint")
-//                            result.setValue(objectNum, forKey: "objectNum")
-//
-//                            
-//                            if result.valueForKey("objectNum") as? Int == 0 {
-//                                context.deleteObject(result)
-//                                do{
-//                                    try context.save()
-//                                }catch{
-//                                    print("couldn't do it")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                do {
-//                    
-//                    try context.save()
-//                    print("Vehicle Saved")
-//                    
-//                } catch {
-//                    
-//                    print("There was a problem!")
-//                    
-//                }
-//                
-//            }catch{
-//                print("Error")
-//            }
-//
-//            
-//        }else{
-//            
-//            let newData = NSEntityDescription.insertNewObjectForEntityForName("PageSix", inManagedObjectContext: context)
-//
-//            
-//            newData.setValue(typeVehicleField.text,forKey: "tipoVehiculoMotor")
-//            newData.setValue(direccionViajeField.text,forKey: "direccionDeViaje")
-//            newData.setValue(funcionEspecialField.text,forKey: "funcionEspecial")
-//            newData.setValue(usoVehiculoField.text,forKey:"usoDeVehiculo")
-//            newData.setValue(maniobraField.text,forKey:"maniobra")
-//            newData.setValue(mphField.text,forKey:"mph")
-//            newData.setValue(mphdosField.text,forKey:"limiteDeVelocidad")
-//            newData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let secondNewData = NSEntityDescription.insertNewObjectForEntityForName("PageSeven", inManagedObjectContext: context)
-//            
-//            
-//            //still have to verify tipo controles in database
-//            secondNewData.setValue(alineamientoField.text, forKey: "alineamiento")
-//            secondNewData.setValue(categoriaField.text, forKey: "categoriaCarril")
-//            secondNewData.setValue(roadDescriptionField.text, forKey: "descripcionCarretera")
-//            secondNewData.setValue(inclinacionField.text, forKey: "inclinacion")
-//            secondNewData.setValue(operacionField.text, forKey: "operationOrLost")
-//            secondNewData.setValue(typeCarrilField.text, forKey: "tipoCarril")
-//            secondNewData.setValue(cantidadField.text, forKey: "cantidadCarril")
-//            secondNewData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let thirdNewData = NSEntityDescription.insertNewObjectForEntityForName("PageEight", inManagedObjectContext: context)
-//            
-//            thirdNewData.setValue(primerCategoria.text, forKey: "primeraCategoria")
-//            thirdNewData.setValue(segundaCategoria.text, forKey: "segundaCategoria")
-//            thirdNewData.setValue(terceraCategoria.text, forKey: "terceraCategoria")
-//            thirdNewData.setValue(cuartaCategoria.text, forKey: "cuartaCategoria")
-//            thirdNewData.setValue(primerEvento.text, forKey: "primerEvento")
-//            thirdNewData.setValue(segundoEvento.text, forKey: "segundoEvento")
-//            thirdNewData.setValue(tercerEvento.text, forKey: "tercerEvento")
-//            thirdNewData.setValue(cuartoEvento.text, forKey: "cuartoEvento")
-//            thirdNewData.setValue(usoBusField.text, forKey: "busUse")
-//            thirdNewData.setValue(abandonoLugarField.text, forKey: "leftPlace")
-//            thirdNewData.setValue(remolcadoField.text, forKey: "towedDamage")
-//            thirdNewData.setValue(primerDefecto.text, forKey: "primerDefectoMec")
-//            thirdNewData.setValue(segundoDefecto.text, forKey: "segundoDefectoMec")
-//            thirdNewData.setValue(objectNum, forKey: "objectNum")
-//            
-//            let fourthNewData = NSEntityDescription.insertNewObjectForEntityForName("PageNine", inManagedObjectContext: context)
-//            
-//            fourthNewData.setValue(PuntoInicialField.text, forKey: "initialContactPoint")
-//            fourthNewData.setValue(numeroIdentificacionField.text, forKey: "diamondIDNumber")
-//            fourthNewData.setValue(usoVehiculoComercialField.text, forKey: "commercialVehicle")
-//            fourthNewData.setValue(vehiculoMovimientoField.text, forKey: "movingVehicle")
-//            fourthNewData.setValue(inspeccionDiaField.text, forKey: "inspectionDate")
-//            fourthNewData.setValue(gradoDanioField.text, forKey: "extendDamage")//unsure
-//            fourthNewData.setValue(conductorAutorizadoField.text, forKey: "authorizedDriver")
-//            fourthNewData.setValue(confVehiculo.text, forKey: "vehicleConfiguration")
-//            fourthNewData.setValue(vehiculoContieneMPField.text, forKey: "hazardousMaterial")//unsure
-//            fourthNewData.setValue(cantidadEjesField.text, forKey: "totalAxis")
-//            fourthNewData.setValue(permisoEspecialField.text, forKey: "specialPermit")
-//            fourthNewData.setValue(tipoVehiculoCargaField.text, forKey: "heavyVehicleType")
-//            fourthNewData.setValue(pesoBrutoField.text, forKey: "grossWeight")
-//            fourthNewData.setValue(objectNum, forKey: "objectNum")
-//            //print("done")
-//            
-//           
-//            do {
-//                
-//                try context.save()
-//                print("Vehicle Saved")
-//            } catch {
-//                
-//                print("There was a problem!")
-//            }
-//        }
-//        
-//        let request1 = NSFetchRequest(entityName: "PageSix")
-//        request1.returnsObjectsAsFaults = false
-//        let request2 = NSFetchRequest(entityName: "PageSeven")
-//        request2.returnsObjectsAsFaults = false
-//        let request3 = NSFetchRequest(entityName: "PageEight")
-//        request3.returnsObjectsAsFaults = false
-//        let request4 = NSFetchRequest(entityName: "PageNine")
-//        request4.returnsObjectsAsFaults = false
-//        
-//        
-//        //cleanup of invisible objects
-//        do {
-//            let results1 = try context.executeFetchRequest(request1)
-//            let results2 = try context.executeFetchRequest(request2)
-//            let results3 = try context.executeFetchRequest(request3)
-//            let results4 = try context.executeFetchRequest(request4)
-//            
-//            
-//            
-//            if results1.count > 0 {
-//                
-//                for result in results1 as! [NSManagedObject] {
-//                    //print("For object #",result.valueForKey("objectNum")!)
-//                   
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }//close catch
-//                    }//close nested if
-//                    
-//                }//close for
-//                
-//            }//close if
-//            
-//            
-//            if results2.count > 0 {
-//                
-//                for result in results2 as! [NSManagedObject] {
-//                    //print("For object #",result.valueForKey("objectNum")!)
-//                    
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//                    }
-//                    
-//                }
-//                
-//            }
-//
-//            
-//            
-//            
-//            if results3.count > 0 {
-//                
-//                for result in results3 as! [NSManagedObject] {
-//                    //print("For object #",result.valueForKey("objectNum")!)
-//                    
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//                    }
-//                    
-//                }
-//                
-//            }
-//
-//            
-//            
-//            
-//            if results4.count > 0 {
-//                
-//                for result in results4 as! [NSManagedObject] {
-//                    //print("For object #",result.valueForKey("objectNum")!)
-//                    
-//                    if (result.valueForKey("objectNum") as? Int == 0){
-//                        context.deleteObject(result)
-//                        do{
-//                            try context.save()
-//                            print("did it")
-//                        }catch{
-//                            print("couldn't do it")
-//                        }
-//                    }
-//                    
-//                }
-//                
-//            }
-//
-//            
-//        }catch {
-//            
-//            print("Fetch Failed")
-//        }
-        
-        
-        
-        
-        //        if segue.identifier == "exitToDataEntry"{
-        if let detailsVC = segue.destinationViewController as? VehiclesTableViewController{
-            detailsVC.tableView.reloadData()
-            //print("Leaving VC")
-            objectNum = 0
-            isUpdating = false
-
-            dictionary["numDeTablilla"] =                ""
-            dictionary["year"] =                ""
-            dictionary["marca"] =                ""
-            dictionary["modelo"] =                ""
-            
-            dictionary["tipoVehiculoMotor"] =                ""
-            dictionary["direccionDeViaje"] =                ""
-            dictionary["funcionEspecial"] =                ""
-            dictionary["usoDeVehiculo"] =                ""
-            dictionary["maniobra"] =                ""
-            dictionary["descripcionCarretera"] =                ""
-            dictionary["alineamiento"] =                ""
-            dictionary["inclinacion"] =                ""
-            dictionary["categoriaCarril"] =                ""
-            dictionary["tipoCarril"] =                ""
-            // tipoControlesField.text = dictionary["numDeTablilla"]
-            dictionary["operationOrLost"] =                ""
-            dictionary["primeraCategoria"] =                ""
-            dictionary["segundaCategoria"] =                ""
-            dictionary["terceraCategoria"] =                ""
-            dictionary["cuartaCategoria"] =                ""
-            dictionary["primerEvento"] =                ""
-            dictionary["segundoEvento"] =                ""
-            dictionary["tercerEvento"] =                ""
-            dictionary["cuartoEvento"] =                ""
-           dictionary["busUse"] =                ""
-            dictionary["leftPlace"] =                ""
-            dictionary["towedDamage"] =                ""
-            dictionary["primerDefectoMec"] =                ""
-            dictionary["segundoDefectoMec"] =                ""
-            dictionary["initialContactPoint"] =                ""
-            //areaAfectadaField.text = dictionary["numDeTablilla"]
-            dictionary["extendDamage"] =                ""
-            dictionary["commercialVehicle"] =                ""
-            dictionary["movingVehicle"] =                ""
-            dictionary["authorizedDriver"] =                ""
-            dictionary["inspectionDate"] =                ""
-            dictionary["specialPermit"] =                ""
-            dictionary["grossWeight"] =                ""
-            
-            
-            dictionary["vehicleConfiguration"] =                ""
-            dictionary["heavyVehicleType"] =                ""
-            dictionary["hazardousMaterial"] =                ""
-            dictionary["diamondIDNumber"] =                ""
-            //huboDerrameMPField.text = dictionary["numDeTablilla"]
-            
-            
-            
-            dictionary["totalAxis"] =                ""
-            dictionary["mph"] =                ""
-            dictionary["limiteDeVelocidad"] =                ""
-            dictionary["cantidadCarril"] =                ""
-
-            if let detailsVC = segue.destinationViewController as? VehiclesTableViewController{
-                detailsVC.dictionary = self.dictionary
-            }
-        
-            print(areaAfectadaField.selectedIndex)
-            print ("------------")
-            
-            //  Vehicle Information
-            
-            let  webServicesObjectPOST = WebService.init()
-            
-            webServicesObjectPOST.addIData("MotorVehicle", value: typeVehicleField.text)
-            
-            webServicesObjectPOST.addIData("TripDirection", value: direccionViajeField.text)
-            
-            webServicesObjectPOST.addIData("SpecialFunctionMotor", value: funcionEspecialField.text)
-            
-            webServicesObjectPOST.addIData("EmergencyUse", value: usoVehiculoField.text)
-            
-            webServicesObjectPOST.addIData("MPH", value: mphField.text)
-            
-            webServicesObjectPOST.addIData("PostedSpeedLimit", value: mphdosField.text)
-            
-            webServicesObjectPOST.addIData("MotorVehicleManeuver", value: maniobraField.text)
-            
-            //capturar el  idNewVehicleFK
-            
-            //Information of the road whre the vehicle was passing
-            
-            webServicesObjectPOST.addIData("RoadDescription", value: roadDescriptionField.text)
-            
-            webServicesObjectPOST.addIData("Alignment", value: alineamientoField.text)
-            
-            webServicesObjectPOST.addIData("Slope", value: inclinacionField.text)
-            
-            webServicesObjectPOST.addIData("Cantidad", value: cantidadField.text)
-            
-            webServicesObjectPOST.addIData("CategoriaCarril", value: categoriaField.text)
-            
-            //Selection Tipo Controles de Transito. TCDTypeSlection
-            
-            //TCDTypeID
-            
-            //idInformationRoadVehiclePasssing
-            
-            //idNewVehicleFK
-            
-            // webServicesObjectPOST.addIData("", value: tipoControlesField.text)
-            
-            
-            
-            webServicesObjectPOST.addIData("TipoCarril", value: typeCarrilField.text)
-            
-            webServicesObjectPOST.addIData("OperationOrLost", value: operacionField.text)
-            
-            //capturar el  idNewVehicleFK
-            
-            //Information Event Vehicle
-            
-            webServicesObjectPOST.addIData("PrimeraCategoria", value: primerCategoria.text)
-            
-            webServicesObjectPOST.addIData("SegundaCategoria", value: segundaCategoria.text)
-            
-            webServicesObjectPOST.addIData("TerceraCategoria", value: terceraCategoria.text)
-            
-            webServicesObjectPOST.addIData("CuartaCategoria", value: cuartaCategoria.text)
-            
-            webServicesObjectPOST.addIData("PrimerEvento", value: primerEvento.text)
-            
-            webServicesObjectPOST.addIData("SegundoEvento", value: segundoEvento.text)
-            
-            webServicesObjectPOST.addIData("TercerEvento", value: tercerEvento.text)
-            
-            webServicesObjectPOST.addIData("CuartoEvento", value: cuartoEvento.text)
-            
-            webServicesObjectPOST.addIData("BusUse", value: usoBusField.text)
-            
-            webServicesObjectPOST.addIData("LeftPlace", value: abandonoLugarField.text)
-            
-            webServicesObjectPOST.addIData("TowedDamage", value: remolcadoField.text)
-            
-            webServicesObjectPOST.addIData("PrimerDefectoMecanico", value: primerDefecto.text)
-            
-            webServicesObjectPOST.addIData("SegundoDefectoMecanico", value: segundoDefecto.text)
-            
-            //capturar el  idNewVehicleFK
-            
-            //CommercialVehicleHazardousMaterial
-            
-            webServicesObjectPOST.addIData("InitialContactPoint", value: PuntoInicialField.text)
-            
-            //slection Areas Afectasdas AffectAreasSelection.
-            
-            // capturar IdCommercialVehicleHazardousMaterialFK
-            
-            //damageAreaIDFK
-            
-            //idNewVehicleFK
-            
-            //webServicesObjectPOST.addIData("", value: areaAfectadaField.text)
-            
-            
-            
-            webServicesObjectPOST.addIData("ExtendDamage", value: gradoDanioField.text)
-            
-            webServicesObjectPOST.addIData("CommercialVehicleUse", value: usoVehiculoComercialField.text)
-            
-            webServicesObjectPOST.addIData("MovingVehicle", value: vehiculoMovimientoField.text)
-            
-            webServicesObjectPOST.addIData("AuthorizedDriver", value: conductorAutorizadoField.text)
-            
-            webServicesObjectPOST.addIData("InspectionDate", value: inspeccionDiaField.text)
-            
-            webServicesObjectPOST.addIData("SpecialPermit", value: permisoEspecialField.text)
-            
-            webServicesObjectPOST.addIData("GrosWeight", value: pesoBrutoField.text)
-            
-            webServicesObjectPOST.addIData("TotalAxis", value: cantidadEjesField.text)
-            
-            webServicesObjectPOST.addIData("VehicleConfiguration", value: confVehiculo.text)
-            
-            webServicesObjectPOST.addIData("HeavyVehicleType", value: tipoVehiculoCargaField.text)
-            
-            webServicesObjectPOST.addIData("HazardousMaterial", value: vehiculoContieneMPField.text)
-            
-            webServicesObjectPOST.addIData("DiamondIdNumber", value: numeroIdentificacionField.text)
-            
-            webServicesObjectPOST.addIData("DueCollision", value: huboDerrameMPField.text)
-            
-            //captura el fk vehicle
-            
-            webServicesObjectPOST.sendPOSTs(6)
-    }
+          }
  
     }
 
 
-}
+

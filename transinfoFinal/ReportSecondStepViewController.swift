@@ -49,6 +49,13 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         //ws
+        
+        let singleton = Global.sharedGlobal
+        
+        print(singleton.foreignKeys)
+
+        //singleton.foreignKeys[0].crashBasicInformation = 112
+        
         let webServicesObject = WebService.init()
         
         webServicesObject.initiate(2)
@@ -235,196 +242,47 @@ class ReportSecondStepViewController: UIViewController, UITableViewDelegate, UIT
         
         let webServicesObject2 = WebService.init()
       
+        let singleton = Global.sharedGlobal
         
-        let myID = crashID["success"]
-        let results = myID as? Dictionary<String,AnyObject>
-        if results!["CrashId"] != nil {
-            //print("Here it is!",results!["CrashId"])
-            values["CrashConditionFK"] = results!["CrashId"]?.stringValue
-            }
-       // values["CrashConditionFK"] = "106"
+        if (crashID.first!.0 == "error_code" || crashID.first!.0 == "error")  {
+            let alertController = UIAlertController(title: "No has llenado todos los campos o has puesto un valor erroneo.", message:
+                "Por favor llena/arregla los campos.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
             
+            crashID.removeAll()
             
-            
-        
-//                    let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//            
-//            let context: NSManagedObjectContext = appDel.managedObjectContext
-//            
-//            let newData = NSEntityDescription.insertNewObjectForEntityForName("PageTwo", inManagedObjectContext: context)
-//            
-//            
-//            newData.setValue(typeColisionField.text,forKey: "tipoColision")
-//            newData.setValue(eventField.text,forKey: "evento")
-//            newData.setValue(eventLocationField.text,forKey: "localizacionEvento")
-//            newData.setValue(mannerColisionField.text,forKey:"formaColision")
-//            newData.setValue(condition1Field.text,forKey:"clima1")
-//            newData.setValue(condition2Field.text,forKey:"clima2")
-//            newData.setValue(visibilidadConditionField.text,forKey:"visibilidad")
-//            newData.setValue(pavimentCondition.text,forKey:"pavimento")
-//            newData.setValue(circunstanciaAmbientalField.text,forKey:"ambiente")
-//            newData.setValue(circunstanciaCarreteraField.text,forKey:"carretera")
-//            newData.setValue(interseccionDesnivelField.text,forKey:"interseccionDesnivel")
-//            //newData.setValue ("direccionField.text",forKey:"fechaAccidente")
-//            newData.setValue(lugarEspecificoField.text,forKey:"lugarEspecifico")
-//            newData.setValue(tipoIntersecciónField.text,forKey:"tipoInterseccion")
-//            newData.setValue(RelacionadoOmnibusField.text,forKey:"omnibus")
-//            newData.setValue(relacionField.text,forKey:"areaConstruccionOMantenimiento")
-//            newData.setValue(localizacionAccidenteField.text,forKey:"localizacionAcidente")
-//            newData.setValue(typezonaField.text,forKey:"tipoZonaTrabajo")
-//            // newData.setValue(propertyTypeField.text,forKey:"tipoPropiedad")
-//            newData.setValue(trabajadoresPresentesField.text,forKey:"trabajadoresPresentes")
-//            newData.setValue(policiaPresenteField.text,forKey:"policiaPresente")
-//            
-//            let request = NSFetchRequest(entityName: "PageTwo")
-//        
-//        request.returnsObjectsAsFaults = false
-//        do {
-//            
-//            try context.save()
-//            
-//        } catch {
-//            
-//            print("There was a problem!")
-//            
-//        }
-//        
-//        
-//        do {
-//            let results = try context.executeFetchRequest(request)
-//            
-//            
-//            
-//            if results.count > 0 {
-//                
-//                for result in results as! [NSManagedObject] {
-//                    print(result.objectID)
-//                    print(result.valueForKey("clima1")!)
-//                    print(result.valueForKey("clima2")!)
-//                    print(result.valueForKey("evento")!)
-//                    print(result.valueForKey("tipoColision")!)
-//                    print(result.valueForKey("localizacionEvento")!)
-//                    print(result.valueForKey("formaColision")!)
-//                    print(result.valueForKey("visibilidad")!)
-//                    print(result.valueForKey("pavimento")!)
-//                    print(result.valueForKey("ambiente")!)
-//                    print(result.valueForKey("carretera")!)
-//                    print(result.valueForKey("interseccionDesnivel")!)
-//                    print(result.valueForKey("lugarEspecifico")!)
-//                    print(result.valueForKey("tipoInterseccion")!)
-//                    print(result.valueForKey("omnibus")!)
-//                    print(result.valueForKey("areaConstruccionOMantenimiento")!)
-//                    print(result.valueForKey("localizacionAcidente")!)
-//                    print(result.valueForKey("tipoZonaTrabajo")!)
-//                    print(result.valueForKey("trabajadoresPresentes")!)
-//                    print(result.valueForKey("policiaPresente")!)
-//                    
-//                }
-//                
-//            }
-//            
-//        } catch {
-//            
-//            print("Fetch Failed")
-//        }
-//
-//        
-//            
-//            
-//        
-//        
-//        print ("******************")
-//        
-//        
-//
-        
-        
-        
-        
-        //uncomment heredsfghgvjhbjnk
-        
-        
-        
-        
-        
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let context: NSManagedObjectContext = appDel.managedObjectContext
-        
-        let newData1 = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context)
-        
-        newData1.setValue(results!["CrashId"], forKey: "crashConditions")
-        
-        
-        
-        do {
-            
-            try context.save()
-            
-        } catch {
-            
-            print("There was a problem!")
-            
-        }
-        
-        
-        
-        let request11 = NSFetchRequest(entityName: "Posts")
-        
-        
-        
-        request11.returnsObjectsAsFaults = false
-        do {
-            
-            try context.save()
-            
-        } catch {
-            
-            print("There was a problem!")
-            
-        }
-        
-        
-        do {
-            let results = try context.executeFetchRequest(request11)
-            
-            
-            
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    
-                    if result.valueForKey("crashBasicInformation") as? Int != 0 {
-                        print("here is the crashid for page1: ",result.valueForKey("crashBasicInformation"))
-                        values["AccidenteFK"] = result.valueForKey("crashBasicInformation")?.stringValue
-                    }
-                    
-                    }
-                }
-                
-            }catch {
-            
-            print("Fetch Failed")
-        }
-    
-    
-    
+        }else{
+            let myID = crashID.first!.1
+            let results = myID as? Dictionary<String,AnyObject>
+            print("Here it is!",results!["NarrativaId"])
+            singleton.foreignKeys[0].accidentCondition = (results!["NarrativaId"]?.integerValue)!
+            print(singleton.foreignKeys[0].accidentCondition)
 
+            
+        }
+
+    
+        
+        values["AccidenteFK"] = singleton.foreignKeys[0].crashBasicInformation
+ 
+        values["CrashConditionFK"] = singleton.foreignKeys[0].accidentCondition
+        
+        print("Here's the singleton",singleton.foreignKeys)
 
         webServicesObject2.clearPostData()
    
-        print("here's value 1:",values["AccidenteFK"] as! String )
-        print("here's value 2:",values["CrashConditionFK"] as! String)
+        print("here's value 1:",values["AccidenteFK"] )
+        print("here's value 2:",values["CrashConditionFK"]?.stringValue)
 
-        webServicesObject2.addIData("AccidenteFK", value: values["AccidenteFK"] as! String)
-    
-        webServicesObject2.addIData("CrashConditionFK", value: values["CrashConditionFK"] as! String)
+        webServicesObject2.addIData("AccidenteFK", value: values["AccidenteFK"]?.stringValue)
+        
+        webServicesObject2.addIData("CrashConditionFK", value: values["CrashConditionFK"]?.stringValue)
 
-  
+        print(webServicesObject2.PostData)
         
-        print(webServicesObject2.Data)
         
-        crashID = webServicesObject2.sendPOSTs(9)
+        webServicesObject2.sendPOSTs(9)
         
         
     }
